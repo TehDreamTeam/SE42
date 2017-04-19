@@ -12,12 +12,6 @@ import java.util.List;
 public interface DAO<I, T> {
 
     /**
-     * Gets the count of the objects in the database.
-     * @return An integer that represents the amount of objects in the database.
-     */
-    int count();
-
-    /**
      * Creates a record in the database for the given object.
      * @param object The object that should be saved to the database.
      */
