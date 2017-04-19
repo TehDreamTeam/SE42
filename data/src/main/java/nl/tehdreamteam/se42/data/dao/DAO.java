@@ -6,10 +6,10 @@ import java.util.List;
  * DAO defines the standard operations that should be available for every specialized DAO.
  *
  * @author Oscar de Leeuw
- * @param <ID> The class that is used for identifying the object in the database.
+ * @param <I> The class that is used for identifying the object in the database.
  * @param <T> The class that is managed by this DAO.
  */
-public interface DAO<ID, T> {
+public interface DAO<I, T> {
 
     /**
      * Gets the count of the objects in the database.
@@ -30,11 +30,11 @@ public interface DAO<ID, T> {
     void edit(T object);
 
     /**
-     * Finds an object in the database with the given id.
-     * @param id The id of the object.
-     * @return The object with the given id from the database.
+     * Finds an object in the database with the given i.
+     * @param i The id of the object.
+     * @return The object with the given i from the database.
      */
-    T find(ID id);
+    T find(I i);
 
     /**
      * Finds all the objects of this type in the database.
