@@ -7,18 +7,18 @@ import javax.persistence.EntityManager;
 
 /**
  * Implementation of the MessageDAO interface.
- * Extends DefaultDAOHibernateImpl for default DAO operations as described in the DAO interface.
+ * Extends HibernateDAO for default DAO operations as described in the DAO interface.
  *
  * @author Oscar de Leeuw
  */
-public class MessageDAOHibernateImpl extends DefaultDAOHibernateImpl<Long, Message> implements MessageDAO {
+public class HibernateMessageDAO extends HibernateDAO<Long, Message> implements MessageDAO {
 
     /**
-     * Creates a new MessageDAOHibernateImpl.
+     * Creates a new HibernateMessageDAO.
      *
      * @param entityManager The EntityManager for managing the JPA.
      */
-    public MessageDAOHibernateImpl(EntityManager entityManager) {
+    public HibernateMessageDAO(EntityManager entityManager) {
         super(entityManager, Message.class);
     }
 }
