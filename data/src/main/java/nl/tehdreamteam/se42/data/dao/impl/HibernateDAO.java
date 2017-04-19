@@ -13,18 +13,18 @@ import java.util.List;
  * @param <T> The class of the object whose persistence should be managed.
  * @author Oscar de Leeuw
  */
-public abstract class DefaultDAOHibernateImpl<I, T> implements DAO<I, T> {
+public abstract class HibernateDAO<I, T> implements DAO<I, T> {
 
     protected final EntityManager em;
     private final Class<T> type;
 
     /**
-     * Creates a new DefaultDAOHibernateImpl.
+     * Creates a new HibernateDAO.
      *
      * @param entityManager The EntityManager for managing the JPA.
      * @param type          The type of the generic T.
      */
-    protected DefaultDAOHibernateImpl(EntityManager entityManager, Class<T> type) {
+    protected HibernateDAO(EntityManager entityManager, Class<T> type) {
         this.em = entityManager;
         this.type = type;
     }
