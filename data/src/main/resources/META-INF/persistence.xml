@@ -4,7 +4,7 @@
              version="2.0">
     <persistence-unit name="manager">
 
-        <class>Test</class>
+        <class>nl.tehdreamteam.se42.domain.Message</class>
 
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL57Dialect"/>
