@@ -1,0 +1,50 @@
+allprojects {
+    group = 'nl.tehdreamteam.se42'
+    version = '0.0.1'
+}
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'jacoco'
+
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+
+    dependencies {
+        testCompile group: 'junit', name: 'junit', version: '4.12'
+    }
+
+    test {
+        reports.junitXml.destination = "build/test-reports"
+    }
+
+    sourceSets {
+        integrationTest {
+            java {
+                compileClasspath += main.output + test.output
+                runtimeClasspath += main.output + test.output
+            }
+        }
+    }
+
+    configurations {
+        integrationTestCompile.extendsFrom testCompile
+        integrationTestRuntime.extendsFrom testRuntime
+    }
+
+    task integrationTest(type: Test) {
+        testClassesDir = sourceSets.integrationTest.output.classesDir
+        classpath = sourceSets.integrationTest.runtimeClasspath
+
+        reports.junitXml.destination = "build/test-reports"
+    }
+
+    //check.dependsOn integrationTest
+    integrationTest.mustRunAfter test
+
+}

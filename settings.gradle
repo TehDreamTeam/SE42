@@ -1,0 +1,6 @@
+rootProject.name = 'SE42'
+
+include ':domain'
+include ':data'
+include ':logic'
+include ':web'
