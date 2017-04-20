@@ -11,14 +11,14 @@ import javax.persistence.EntityManager;
  *
  * @author Oscar de Leeuw
  */
-public class HibernateMessageDAO extends HibernateDAO<Long, Message> implements MessageDAO {
+public class MessageHibernateDAO extends HibernateDAO<Long, Message> implements MessageDAO {
 
     /**
-     * Creates a new HibernateMessageDAO.
+     * Creates a new MessageHibernateDAO.
      *
      * @param entityManager The EntityManager for managing the JPA.
      */
-    public HibernateMessageDAO(EntityManager entityManager) {
+    public MessageHibernateDAO(EntityManager entityManager) {
         super(entityManager, Message.class);
     }
 }

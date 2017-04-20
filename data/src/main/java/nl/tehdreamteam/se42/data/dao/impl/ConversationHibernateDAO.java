@@ -11,14 +11,14 @@ import javax.persistence.EntityManager;
  *
  * @author Oscar de Leeuw
  */
-public class HibernateConversationDAO extends HibernateDAO<Long, Conversation> implements ConversationDAO {
+public class ConversationHibernateDAO extends HibernateDAO<Long, Conversation> implements ConversationDAO {
     /**
-     * Creates a new HibernateConversationDAO.
+     * Creates a new ConversationHibernateDAO.
      *
      * @param entityManager The EntityManager for managing the JPA.
      * @param type          The type of the generic T.
      */
-    public HibernateConversationDAO(EntityManager entityManager, Class<Conversation> type) {
+    public ConversationHibernateDAO(EntityManager entityManager, Class<Conversation> type) {
         super(entityManager, type);
     }
 }

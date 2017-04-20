@@ -1,7 +1,7 @@
 package nl.tehdreamteam.se42.data.context.impl;
 
 import nl.tehdreamteam.se42.data.dao.MessageDAO;
-import nl.tehdreamteam.se42.data.dao.impl.HibernateMessageDAO;
+import nl.tehdreamteam.se42.data.dao.impl.MessageHibernateDAO;
 import nl.tehdreamteam.se42.domain.Message;
 
 import javax.persistence.EntityManager;
@@ -15,7 +15,7 @@ public final class MessageHibernateContext extends HibernateContext<Long, Messag
 
     @Override
     protected MessageDAO createDao(EntityManager manager) {
-        return new HibernateMessageDAO(manager);
+        return new MessageHibernateDAO(manager);
     }
 
 }

@@ -1,7 +1,7 @@
 package nl.tehdreamteam.se42.data.context.impl;
 
 import nl.tehdreamteam.se42.data.dao.ConversationDAO;
-import nl.tehdreamteam.se42.data.dao.impl.HibernateConversationDAO;
+import nl.tehdreamteam.se42.data.dao.impl.ConversationHibernateDAO;
 import nl.tehdreamteam.se42.domain.Conversation;
 
 import javax.persistence.EntityManager;
@@ -14,6 +14,6 @@ import javax.persistence.EntityManager;
 public class ConversationHibernateContext extends HibernateContext<Long, Conversation, ConversationDAO> {
     @Override
     protected ConversationDAO createDao(EntityManager manager) {
-        return new HibernateConversationDAO(manager, Conversation.class);
+        return new ConversationHibernateDAO(manager, Conversation.class);
     }
 }
