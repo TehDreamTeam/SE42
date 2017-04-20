@@ -1,5 +1,6 @@
-package nl.tehdreamteam.se42.data.conversation;
+package nl.tehdreamteam.se42.data.conversation.hibernate;
 
+import nl.tehdreamteam.se42.data.conversation.ConversationDAO;
 import nl.tehdreamteam.se42.data.dao.HibernateDAO;
 import nl.tehdreamteam.se42.domain.Conversation;
 
