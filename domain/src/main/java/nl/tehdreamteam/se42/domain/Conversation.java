@@ -1,6 +1,12 @@
 package nl.tehdreamteam.se42.domain;
 
-import javax.persistence.*;
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -16,7 +22,7 @@ public class Conversation {
     @ManyToMany(mappedBy = "conversations")
     private List<User> participants;
     @ElementCollection
-    @CollectionTable(name = "Message")
+    @CollectionTable(name = "Messages")
     @Column(name = "message_id")
     private List<Message> messages;
 

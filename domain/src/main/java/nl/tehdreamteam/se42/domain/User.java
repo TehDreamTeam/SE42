@@ -1,6 +1,15 @@
 package nl.tehdreamteam.se42.domain;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import java.util.List;
 
 /**
@@ -9,6 +18,10 @@ import java.util.List;
  * @author Oscar de Leeuw
  */
 @Entity
+@NamedQueries({
+        @NamedQuery(name = "User.findByUsername",
+                query = "SELECT a FROM User AS a WHERE a.loginCredentials.username = :username")
+})
 public class User {
 
     @Id
@@ -16,7 +29,7 @@ public class User {
     private Long id;
     @Embedded
     private LoginCredentials loginCredentials;
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(name = "jnd_usr_conv", joinColumns = @JoinColumn(name = "user_fk"), inverseJoinColumns = @JoinColumn(name = "conv_fk"))
     private List<Conversation> conversations;
 
