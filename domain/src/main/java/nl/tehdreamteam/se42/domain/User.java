@@ -1,15 +1,7 @@
 package nl.tehdreamteam.se42.domain;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
+import javax.persistence.*;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -18,6 +10,7 @@ import java.util.List;
  * @author Oscar de Leeuw
  */
 @Entity
+@Table(name = "user")
 @NamedQueries({
         @NamedQuery(name = "User.findByUsername",
                 query = "SELECT a FROM User AS a WHERE a.loginCredentials.username = :username")
@@ -29,8 +22,7 @@ public class User {
     private Long id;
     @Embedded
     private LoginCredentials loginCredentials;
-    @ManyToMany(cascade = CascadeType.MERGE)
-    @JoinTable(name = "jnd_usr_conv", joinColumns = @JoinColumn(name = "user_fk"), inverseJoinColumns = @JoinColumn(name = "conv_fk"))
+    @ManyToMany(mappedBy = "participants")
     private List<Conversation> conversations;
 
     protected User() {
@@ -44,6 +36,7 @@ public class User {
      */
     public User(LoginCredentials loginCredentials) {
         this.loginCredentials = loginCredentials;
+        this.conversations = new LinkedList<>();
     }
 
     public LoginCredentials getLoginCredentials() {
