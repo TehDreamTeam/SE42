@@ -20,7 +20,7 @@ public class User {
     @JoinTable(name = "jnd_usr_conv", joinColumns = @JoinColumn(name = "user_fk"), inverseJoinColumns = @JoinColumn(name = "conv_fk"))
     private List<Conversation> conversations;
 
-    private User() {
+    protected User() {
 
     }
 

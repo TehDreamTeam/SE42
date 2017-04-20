@@ -16,11 +16,11 @@ public class Message {
     @GeneratedValue
     private Long id;
     private String content;
+    @OneToOne(cascade = CascadeType.ALL)
     private User sender;
-    @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime time;
 
-    private Message() {
+    protected Message() {
 
     }
 
@@ -33,6 +33,7 @@ public class Message {
     public Message(String content, User sender) {
         this.content = content;
         this.sender = sender;
+        time = LocalDateTime.now();
     }
 
     public String getContent() {

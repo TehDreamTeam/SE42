@@ -16,7 +16,7 @@ public class Conversation {
     @ManyToMany(mappedBy = "conversations")
     private List<User> participants;
     @ElementCollection
-    @CollectionTable(name = "messages")
+    @CollectionTable(name = "Message")
     @Column(name = "message_id")
     private List<Message> messages;
 
