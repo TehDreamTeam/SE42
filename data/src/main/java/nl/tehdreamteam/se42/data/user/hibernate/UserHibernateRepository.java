@@ -1,6 +1,8 @@
-package nl.tehdreamteam.se42.data.user;
+package nl.tehdreamteam.se42.data.user.hibernate;
 
 import nl.tehdreamteam.se42.data.repository.HibernateRepository;
+import nl.tehdreamteam.se42.data.user.UserDAO;
+import nl.tehdreamteam.se42.data.user.UserRepository;
 import nl.tehdreamteam.se42.domain.User;
 
 import javax.persistence.EntityManager;
@@ -11,14 +13,9 @@ import java.util.function.Function;
  *
  * @author Lesley
  */
-public final class UserHibernateRepository extends HibernateRepository<Long, User, UserDAO> {
+public final class UserHibernateRepository extends HibernateRepository<Long, User, UserDAO> implements UserRepository {
 
-    /**
-     * Finds a {@link User}, which has the given {@code username}, in the database.
-     *
-     * @param username The {@code username} of the {@code User} to search the database for.
-     * @return The found {@code User}.
-     */
+    @Override
     public User findByUsername(String username) {
         Function<UserDAO, User> findAllFunction = dao -> dao.findByUsername(username);
 

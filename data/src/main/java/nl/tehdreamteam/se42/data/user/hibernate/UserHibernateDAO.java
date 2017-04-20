@@ -1,7 +1,8 @@
-package nl.tehdreamteam.se42.data.user;
+package nl.tehdreamteam.se42.data.user.hibernate;
 
 import nl.tehdreamteam.se42.data.dao.DAO;
 import nl.tehdreamteam.se42.data.dao.HibernateDAO;
+import nl.tehdreamteam.se42.data.user.UserDAO;
 import nl.tehdreamteam.se42.domain.User;
 
 import javax.persistence.EntityManager;
