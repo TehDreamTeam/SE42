@@ -24,6 +24,11 @@ public class ConversationHibernateRepository extends HibernateRepository<Long, C
     }
 
     @Override
+    public void drop(Conversation conversation) {
+        throw new UnsupportedOperationException("Not yet implemented.");
+    }
+
+    @Override
     public void save(Conversation conversation) {
         Function<ConversationDAO, Void> function = dao -> {
             dao.create(conversation);

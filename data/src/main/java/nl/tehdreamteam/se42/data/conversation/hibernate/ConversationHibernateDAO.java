@@ -40,6 +40,11 @@ public class ConversationHibernateDAO extends HibernateDAO<Long, Conversation> i
     public List<Conversation> findByUser(User user) {
         Query query = super.em.createNamedQuery("Conversation.findByUser");
         query.setParameter("username", user.getLoginCredentials().getUsername());
-        return (List<Conversation>) query.getResultList();
+
+        List<Conversation> result = (List<Conversation>) query.getResultList();
+        result.forEach(c -> Hibernate.initialize(c.getMessages()));
+        result.forEach(c -> Hibernate.initialize(c.getParticipants()));
+
+        return result;
     }
 }
