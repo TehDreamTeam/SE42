@@ -3,6 +3,7 @@ package nl.tehdreamteam.se42.data.user;
 import nl.tehdreamteam.se42.data.user.hibernate.UserHibernateRepository;
 import nl.tehdreamteam.se42.domain.LoginCredentials;
 import nl.tehdreamteam.se42.domain.User;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -32,8 +33,17 @@ public final class UserRepositoryIntegrationTest {
         user = null;
     }
 
+    @After
+    public void resetPersistency() {
+        deleteUser();
+    }
+
     private void saveUser() {
         repository.save(user);
+    }
+
+    private void deleteUser() {
+        repository.delete(user);
     }
 
     private void verifyUserIsAdded() {
