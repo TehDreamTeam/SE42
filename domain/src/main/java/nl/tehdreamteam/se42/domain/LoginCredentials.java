@@ -15,7 +15,7 @@ public class LoginCredentials {
     private String username;
     private String password;
 
-    LoginCredentials() {
+    protected LoginCredentials() {
 
     }
 

@@ -1,12 +1,6 @@
 package nl.tehdreamteam.se42.domain;
 
-import javax.persistence.CollectionTable;
-import javax.persistence.Column;
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -14,16 +8,17 @@ import java.util.List;
  * @author Oscar de Leeuw
  */
 @Entity
+@Table(name = "conversation")
 public class Conversation {
 
     @Id
     @GeneratedValue
     private Long id;
-    @ManyToMany(mappedBy = "conversations")
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "jnd_conv_usr", inverseJoinColumns = @JoinColumn(name = "user_fk"), joinColumns = @JoinColumn(name = "conv_fk"))
     private List<User> participants;
-    @ElementCollection
-    @CollectionTable(name = "Messages")
-    @Column(name = "message_id")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name = "jnd_conv_mess", joinColumns = @JoinColumn(name = "conv_id"), inverseJoinColumns = @JoinColumn(name = "message_id"))
     private List<Message> messages;
 
     /**

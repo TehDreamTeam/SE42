@@ -1,10 +1,6 @@
 package nl.tehdreamteam.se42.domain;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 /**
@@ -14,6 +10,7 @@ import java.time.LocalDateTime;
  * @author Oscar de Leeuw
  */
 @Entity
+@Table(name = "message")
 public class Message {
 
     @Id
@@ -62,5 +59,10 @@ public class Message {
 
     public void setTime(LocalDateTime time) {
         this.time = time;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%tT %s: %s", time, sender.getLoginCredentials().getUsername(), content);
     }
 }
