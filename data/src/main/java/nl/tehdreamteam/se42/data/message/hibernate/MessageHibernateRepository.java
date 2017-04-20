@@ -1,5 +1,7 @@
-package nl.tehdreamteam.se42.data.message;
+package nl.tehdreamteam.se42.data.message.hibernate;
 
+import nl.tehdreamteam.se42.data.message.MessageDAO;
+import nl.tehdreamteam.se42.data.message.MessageRepository;
 import nl.tehdreamteam.se42.data.repository.HibernateRepository;
 import nl.tehdreamteam.se42.domain.Message;
 
@@ -10,7 +12,7 @@ import javax.persistence.EntityManager;
  *
  * @author Lesley
  */
-public final class MessageHibernateRepository extends HibernateRepository<Long, Message, MessageDAO> {
+public final class MessageHibernateRepository extends HibernateRepository<Long, Message, MessageDAO> implements MessageRepository {
 
     @Override
     protected MessageDAO createDao(EntityManager manager) {
