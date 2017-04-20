@@ -64,4 +64,5 @@ public class User {
     public void removeConversation(Conversation conversation) {
         conversations.remove(conversation);
     }
+
 }

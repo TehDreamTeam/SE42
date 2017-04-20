@@ -1,7 +1,8 @@
-package nl.tehdreamteam.se42.data.dao.impl;
+package nl.tehdreamteam.se42.data.user.hibernate;
 
 import nl.tehdreamteam.se42.data.dao.DAO;
-import nl.tehdreamteam.se42.data.dao.UserDAO;
+import nl.tehdreamteam.se42.data.dao.HibernateDAO;
+import nl.tehdreamteam.se42.data.user.UserDAO;
 import nl.tehdreamteam.se42.domain.User;
 
 import javax.persistence.EntityManager;
@@ -13,14 +14,14 @@ import javax.persistence.TypedQuery;
  *
  * @author Lesley Vente
  */
-public final class HibernateUserDAO extends HibernateDAO<Long, User> implements UserDAO {
+public final class UserHibernateDAO extends HibernateDAO<Long, User> implements UserDAO {
 
     /**
-     * Initializes this {@code HibernateUserDAO} using the given entity manager.
+     * Initializes this {@code UserHibernateDAO} using the given entity manager.
      *
      * @param entityManager The EntityManager for managing the JPA.
      */
-    public HibernateUserDAO(EntityManager entityManager) {
+    public UserHibernateDAO(EntityManager entityManager) {
         super(entityManager, User.class);
     }
 

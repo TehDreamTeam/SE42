@@ -1,6 +1,7 @@
-package nl.tehdreamteam.se42.data.dao.impl;
+package nl.tehdreamteam.se42.data.message.hibernate;
 
-import nl.tehdreamteam.se42.data.dao.MessageDAO;
+import nl.tehdreamteam.se42.data.dao.HibernateDAO;
+import nl.tehdreamteam.se42.data.message.MessageDAO;
 import nl.tehdreamteam.se42.domain.Message;
 
 import javax.persistence.EntityManager;
