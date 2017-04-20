@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import java.time.LocalDateTime;
 
 /**
@@ -14,13 +15,14 @@ import java.time.LocalDateTime;
  * @author Oscar de Leeuw
  */
 @Entity
+@Table(name = "message")
 public class Message {
 
     @Id
     @GeneratedValue
     private Long id;
     private String content;
-    @OneToOne(cascade = CascadeType.MERGE)
+    @OneToOne(cascade = CascadeType.ALL)
     private User sender;
     private LocalDateTime time;
 
@@ -62,5 +64,10 @@ public class Message {
 
     public void setTime(LocalDateTime time) {
         this.time = time;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%tT %s: %s", time, sender.getLoginCredentials().getUsername(), content);
     }
 }
