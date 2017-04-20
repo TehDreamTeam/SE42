@@ -1,18 +1,17 @@
-package nl.tehdreamteam.se42.data.context.impl;
+package nl.tehdreamteam.se42.data.user;
 
-import nl.tehdreamteam.se42.data.dao.UserDAO;
-import nl.tehdreamteam.se42.data.dao.impl.HibernateUserDAO;
+import nl.tehdreamteam.se42.data.repository.HibernateRepository;
 import nl.tehdreamteam.se42.domain.User;
 
 import javax.persistence.EntityManager;
 import java.util.function.Function;
 
 /**
- * A {@code UserHibernateContext} defines communication between the database and a {@link UserDAO}.
+ * A {@code UserHibernateRepository} defines communication between the database and a {@link UserDAO}.
  *
  * @author Lesley
  */
-public final class UserHibernateContext extends HibernateContext<Long, User, UserDAO> {
+public final class UserHibernateRepository extends HibernateRepository<Long, User, UserDAO> {
 
     /**
      * Finds a {@link User}, which has the given {@code username}, in the database.
@@ -28,7 +27,7 @@ public final class UserHibernateContext extends HibernateContext<Long, User, Use
 
     @Override
     protected UserDAO createDao(EntityManager manager) {
-        return new HibernateUserDAO(manager);
+        return new UserHibernateDAO(manager);
     }
 
 }

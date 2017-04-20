@@ -1,6 +1,4 @@
-package nl.tehdreamteam.se42.data.dao.impl;
-
-import nl.tehdreamteam.se42.data.dao.DAO;
+package nl.tehdreamteam.se42.data.dao;
 
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaQuery;
