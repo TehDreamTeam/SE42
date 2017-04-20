@@ -15,6 +15,13 @@ public interface UserRepository {
      * @param username The {@code username} of the {@code User} to search the database for.
      * @return The found {@code User}.
      */
-    User findByUsername(String username);
+    User get(String username);
+
+    /**
+     * Saves a {@link User} to the database.
+     *
+     * @param user The {@code user} to save to the database.
+     */
+    void save(User user);
 
 }

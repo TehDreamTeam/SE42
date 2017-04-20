@@ -16,10 +16,20 @@ import java.util.function.Function;
 public final class UserHibernateRepository extends HibernateRepository<Long, User, UserDAO> implements UserRepository {
 
     @Override
-    public User findByUsername(String username) {
-        Function<UserDAO, User> findAllFunction = dao -> dao.findByUsername(username);
+    public User get(String username) {
+        Function<UserDAO, User> getFunction = dao -> dao.findByUsername(username);
 
-        return super.performTransaction(findAllFunction);
+        return super.performTransaction(getFunction);
+    }
+
+    @Override
+    public void save(User user) {
+        Function<UserDAO, User> saveFunction = dao -> {
+            dao.create(user);
+            return null;
+        };
+
+        super.performTransaction(saveFunction);
     }
 
     @Override
