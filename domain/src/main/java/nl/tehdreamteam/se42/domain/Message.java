@@ -1,8 +1,6 @@
 package nl.tehdreamteam.se42.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 /**
@@ -19,7 +17,8 @@ public class Message {
     private Long id;
     private String content;
     private User sender;
-    private LocalDateTime time; //TODO Add time to the message.
+    @Temporal(TemporalType.TIMESTAMP)
+    private LocalDateTime time;
 
     private Message() {
 
@@ -50,5 +49,13 @@ public class Message {
 
     public void setSender(User sender) {
         this.sender = sender;
+    }
+
+    public LocalDateTime getTime() {
+        return time;
+    }
+
+    public void setTime(LocalDateTime time) {
+        this.time = time;
     }
 }
