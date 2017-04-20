@@ -1,9 +1,6 @@
 package nl.tehdreamteam.se42.domain;
 
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.List;
 
 /**
@@ -19,9 +16,11 @@ public class User {
     private Long id;
     @Embedded
     private LoginCredentials loginCredentials;
+    @ManyToMany
+    @JoinTable(name = "jnd_usr_conv", joinColumns = @JoinColumn(name = "user_fk"), inverseJoinColumns = @JoinColumn(name = "conv_fk"))
     private List<Conversation> conversations;
 
-    private User() {
+    protected User() {
 
     }
 

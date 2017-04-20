@@ -1,8 +1,6 @@
 package nl.tehdreamteam.se42.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 /**
@@ -18,10 +16,11 @@ public class Message {
     @GeneratedValue
     private Long id;
     private String content;
+    @OneToOne(cascade = CascadeType.ALL)
     private User sender;
-    private LocalDateTime time; //TODO Add time to the message.
+    private LocalDateTime time;
 
-    private Message() {
+    protected Message() {
 
     }
 
@@ -34,6 +33,7 @@ public class Message {
     public Message(String content, User sender) {
         this.content = content;
         this.sender = sender;
+        time = LocalDateTime.now();
     }
 
     public String getContent() {
@@ -50,5 +50,13 @@ public class Message {
 
     public void setSender(User sender) {
         this.sender = sender;
+    }
+
+    public LocalDateTime getTime() {
+        return time;
+    }
+
+    public void setTime(LocalDateTime time) {
+        this.time = time;
     }
 }
