@@ -1,5 +1,6 @@
 package nl.tehdreamteam.se42.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 /**
@@ -10,6 +11,7 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class LoginCredentials {
 
+    @Column(unique = true)
     private String username;
     private String password;
 

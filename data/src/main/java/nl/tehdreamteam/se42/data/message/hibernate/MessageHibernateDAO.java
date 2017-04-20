@@ -1,6 +1,7 @@
-package nl.tehdreamteam.se42.data.dao.impl;
+package nl.tehdreamteam.se42.data.message.hibernate;
 
-import nl.tehdreamteam.se42.data.dao.MessageDAO;
+import nl.tehdreamteam.se42.data.dao.HibernateDAO;
+import nl.tehdreamteam.se42.data.message.MessageDAO;
 import nl.tehdreamteam.se42.domain.Message;
 
 import javax.persistence.EntityManager;
@@ -11,14 +12,14 @@ import javax.persistence.EntityManager;
  *
  * @author Oscar de Leeuw
  */
-public class HibernateMessageDAO extends HibernateDAO<Long, Message> implements MessageDAO {
+public class MessageHibernateDAO extends HibernateDAO<Long, Message> implements MessageDAO {
 
     /**
-     * Creates a new HibernateMessageDAO.
+     * Creates a new MessageHibernateDAO.
      *
      * @param entityManager The EntityManager for managing the JPA.
      */
-    public HibernateMessageDAO(EntityManager entityManager) {
+    public MessageHibernateDAO(EntityManager entityManager) {
         super(entityManager, Message.class);
     }
 }

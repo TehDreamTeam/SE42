@@ -1,5 +1,6 @@
-package nl.tehdreamteam.se42.data.dao;
+package nl.tehdreamteam.se42.data.message;
 
+import nl.tehdreamteam.se42.data.dao.DAO;
 import nl.tehdreamteam.se42.domain.Message;
 
 /**
