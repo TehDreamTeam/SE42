@@ -79,7 +79,7 @@ public abstract class HibernateContext<I, T, D extends DAO<I, T>> implements Con
      * @param <R>      The return type of the given {@code function}.
      * @return An object fetched from the database, conform the requested type ({@code <R>}).
      */
-    private <R> R performTransaction(Function<D, R> function) {
+    protected <R> R performTransaction(Function<D, R> function) {
         EntityManager manager = factory.createEntityManager();
         beginTransaction(manager);
 
