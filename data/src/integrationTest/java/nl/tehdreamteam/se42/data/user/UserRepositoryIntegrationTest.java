@@ -56,7 +56,7 @@ public final class UserRepositoryIntegrationTest {
     }
 
     private void givenDefaultUser() {
-        LoginCredentials credentials = new LoginCredentials("username", "password");
+        LoginCredentials credentials = new LoginCredentials("some_test_username", "password");
         user = new User(credentials);
     }
 
