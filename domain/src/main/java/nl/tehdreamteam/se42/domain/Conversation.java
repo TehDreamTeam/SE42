@@ -11,7 +11,7 @@ import java.util.List;
 @Table(name = "conversation")
 @NamedQueries({
         @NamedQuery(name = "Conversation.findByUser",
-                query = "SELECT c FROM Conversation c, jnd_conv_usr t, User u WHERE c.id = t.conv_fk AND t.user_fk = u.id AND u.loginCredentials.username = :username ")
+                query = "SELECT c FROM Conversation c inner join c.participants u WHERE u.loginCredentials.username = :username ")
 })
 public class Conversation {
 
