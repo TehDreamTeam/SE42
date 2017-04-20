@@ -9,6 +9,10 @@ import java.util.List;
  */
 @Entity
 @Table(name = "conversation")
+@NamedQueries({
+        @NamedQuery(name = "Conversation.findByUser",
+                query = "SELECT c FROM Conversation c, jnd_conv_usr t, User u WHERE c.id = t.conv_fk AND t.user_fk = u.id AND u.loginCredentials.username = :username ")
+})
 public class Conversation {
 
     @Id
@@ -17,7 +21,7 @@ public class Conversation {
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "jnd_conv_usr", inverseJoinColumns = @JoinColumn(name = "user_fk"), joinColumns = @JoinColumn(name = "conv_fk"))
     private List<User> participants;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "jnd_conv_mess", joinColumns = @JoinColumn(name = "conv_id"), inverseJoinColumns = @JoinColumn(name = "message_id"))
     private List<Message> messages;
 
