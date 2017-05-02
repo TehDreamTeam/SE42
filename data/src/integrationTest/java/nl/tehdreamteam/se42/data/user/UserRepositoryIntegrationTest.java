@@ -51,7 +51,7 @@ public final class UserRepositoryIntegrationTest {
         User actual = repository.get(expected.getLoginCredentials().getUsername());
 
         String expectedUsername = user.getLoginCredentials().getUsername();
-        String actualUsername = user.getLoginCredentials().getUsername();
+        String actualUsername = actual.getLoginCredentials().getUsername();
         assertEquals(expectedUsername, actualUsername);
     }
 
