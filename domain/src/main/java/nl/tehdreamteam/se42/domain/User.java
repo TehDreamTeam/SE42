@@ -1,14 +1,6 @@
 package nl.tehdreamteam.se42.domain;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -45,6 +37,10 @@ public class User {
     public User(LoginCredentials loginCredentials) {
         this.loginCredentials = loginCredentials;
         this.conversations = new LinkedList<>();
+    }
+
+    public long getId() {
+        return id;
     }
 
     public LoginCredentials getLoginCredentials() {
