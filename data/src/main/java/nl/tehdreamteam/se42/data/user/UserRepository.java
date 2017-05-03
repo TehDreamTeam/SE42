@@ -25,10 +25,16 @@ public interface UserRepository {
     void save(User user);
 
     /**
-     * Deletes a {@link User} from the database.
+     * Removes a {@link User} from the database.
      *
-     * @param user The {@code user} to delete from the database.
+     * @param user The {@code user} to remove from the database.
      */
-    void delete(User user);
+    void remove(User user);
 
+    /**
+     * Removes a {@link User} from the database by finding the {@code User} by its {@code id}.
+     *
+     * @param id The {@code id} of the {@code User} to remove from the database.
+     */
+    void remove(long id);
 }

@@ -5,7 +5,11 @@ import nl.tehdreamteam.se42.domain.LoginCredentials;
 import nl.tehdreamteam.se42.domain.User;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
+
+import javax.persistence.NoResultException;
 
 import static org.junit.Assert.assertEquals;
 
@@ -14,8 +18,13 @@ import static org.junit.Assert.assertEquals;
  */
 public final class UserRepositoryIntegrationTest {
 
+    @Rule
+    public final ExpectedException expectedException = ExpectedException.none();
+
     private UserRepository repository;
     private User user;
+
+    private boolean deleted;
 
     @Test
     public void createAndGet_whenCalled_createsUserAndPersists() {
@@ -23,36 +32,73 @@ public final class UserRepositoryIntegrationTest {
         givenDefaultUser();
 
         saveUser();
-
         verifyUserIsAdded();
+    }
+
+    @Test
+    public void removeUser_whenCalled_removesUserFromPersistence() {
+        givenHibernateUserRepository();
+        givenDefaultUser();
+
+        saveUser();
+        verifyUserIsAdded();
+
+        removeUser();
+        verifyUserIsNotAdded();
+    }
+
+    @Test
+    public void removeUserById_whenCalled_removesUserFromPersistence() {
+        givenHibernateUserRepository();
+        givenDefaultUser();
+
+        saveUser();
+        verifyUserIsAdded();
+
+        removeUserById();
+        verifyUserIsNotAdded();
     }
 
     @Before
     public void resetFields() {
         repository = null;
         user = null;
+        deleted = false;
     }
 
     @After
-    public void resetPersistency() {
-        deleteUser();
+    public void resetPersistence() {
+        if (!deleted) {
+            removeUser();
+        }
     }
 
     private void saveUser() {
         repository.save(user);
     }
 
-    private void deleteUser() {
-        repository.delete(user);
+    private void removeUser() {
+        repository.remove(user);
+        deleted = true;
+    }
+
+    private void removeUserById() {
+        repository.remove(user.getId());
+        deleted = true;
+    }
+
+    private void verifyUserIsNotAdded() {
+        expectedException.expect(NoResultException.class);
+        expectedException.expectMessage("No entity found for query");
+
+        repository.get(user.getLoginCredentials().getUsername());
     }
 
     private void verifyUserIsAdded() {
         User expected = user;
         User actual = repository.get(expected.getLoginCredentials().getUsername());
 
-        String expectedUsername = user.getLoginCredentials().getUsername();
-        String actualUsername = actual.getLoginCredentials().getUsername();
-        assertEquals(expectedUsername, actualUsername);
+        assertEquals(expected.getId(), actual.getId());
     }
 
     private void givenDefaultUser() {

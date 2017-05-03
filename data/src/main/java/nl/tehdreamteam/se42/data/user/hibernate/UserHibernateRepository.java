@@ -33,13 +33,25 @@ public final class UserHibernateRepository extends HibernateRepository<Long, Use
     }
 
     @Override
-    public void delete(User user) {
+    public void remove(User user) {
         Function<UserDAO, User> deleteFunction = dao -> {
             dao.remove(user);
             return null;
         };
 
         super.performTransaction(deleteFunction);
+    }
+
+    @Override
+    public void remove(long id) {
+        Function<UserDAO, Void> findAndDeleteFunction = dao -> {
+            User user = dao.find(id);
+            dao.remove(user);
+
+            return null;
+        };
+
+        super.performTransaction(findAndDeleteFunction);
     }
 
     @Override
