@@ -43,6 +43,18 @@ public class ConversationRepositoryIntegrationTest {
         verifyConversationIsAdded();
     }
 
+    @Test
+    public void updateAndGet_whenCalled_updatesConversationAndPersists() throws Exception {
+        saveConversation();
+        addMessage();
+        saveConversation();
+        verifyConversationIsAdded();
+    }
+
+    private void addMessage() {
+        conversation.addMessage(new Message("Henk is een rare jongen", user));
+    }
+
     private void saveConversation() {
         repository.save(conversation);
     }
@@ -51,20 +63,14 @@ public class ConversationRepositoryIntegrationTest {
         Conversation conv = repository.find(conversation.getId());
 
         Assert.assertTrue(new ReflectionEquals(conv).matches(conversation));
-
-       /* Assert.assertEquals(2, conv.getMessages().size());
-        Assert.assertEquals(1, conv.getParticipants().size());
-        Assert.assertTrue(conv.getMessages().stream().anyMatch(s -> s.getContent().equals("Test1")));
-        Assert.assertTrue(conv.getMessages().stream().anyMatch(s -> s.getContent().equals("Test2")));
-        Assert.assertTrue(conv.getParticipants().stream().anyMatch(u -> u.getLoginCredentials().getUsername().equals("username")));*/
     }
 
     private void removeConversation() {
-        repository.remove(conversation);
+        repository.remove(conversation.getId());
     }
 
     private void removeUser() {
-        userRepository.remove(user);
+        userRepository.remove(user.getId());
     }
 
     private ConversationRepository getRepository() {
