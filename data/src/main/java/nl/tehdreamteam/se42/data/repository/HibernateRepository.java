@@ -1,12 +1,10 @@
 package nl.tehdreamteam.se42.data.repository;
 
-import nl.tehdreamteam.se42.data.DataConstants;
+import nl.tehdreamteam.se42.data.EntityManagerLocator;
 import nl.tehdreamteam.se42.data.dao.DAO;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
 import java.util.List;
 import java.util.function.Function;
 
@@ -24,8 +22,7 @@ public abstract class HibernateRepository<I, T, D extends DAO<I, T>> {
     private final EntityManager manager;
 
     protected HibernateRepository() {
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory(DataConstants.HIBERNATE_PERSISTENCY_UNIT_NAME);
-        manager = factory.createEntityManager();
+        manager = EntityManagerLocator.getManager();
     }
 
     /**
