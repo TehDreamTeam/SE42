@@ -23,7 +23,7 @@ public interface ConversationRepository {
      * @param id The id of the {@code Conversation}.
      * @return A {@code Conversation}.
      */
-    Conversation find(long id);
+    Conversation get(long id);
 
     /**
      * Removes a {@code Conversation} from the database with the given id.

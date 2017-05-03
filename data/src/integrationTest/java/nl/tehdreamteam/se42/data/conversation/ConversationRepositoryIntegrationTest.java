@@ -48,7 +48,7 @@ public class ConversationRepositoryIntegrationTest {
     }
 
     private void verifyConversationIsAdded() {
-        Conversation conv = repository.find(conversation.getId());
+        Conversation conv = repository.get(conversation.getId());
 
         Assert.assertTrue(new ReflectionEquals(conv).matches(conversation));
 
