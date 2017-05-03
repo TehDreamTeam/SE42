@@ -50,7 +50,7 @@ public class ConversationRepositoryIntegrationTest {
     private void verifyConversationIsAdded() {
         Conversation conv = repository.find(conversation.getId());
 
-        Assert.assertThat(conversation, new ReflectionEquals(conv));
+        Assert.assertTrue(new ReflectionEquals(conv).matches(conversation));
 
        /* Assert.assertEquals(2, conv.getMessages().size());
         Assert.assertEquals(1, conv.getParticipants().size());
@@ -64,7 +64,7 @@ public class ConversationRepositoryIntegrationTest {
     }
 
     private void removeUser() {
-        userRepository.delete(user);
+        userRepository.remove(user);
     }
 
     private ConversationRepository getRepository() {
