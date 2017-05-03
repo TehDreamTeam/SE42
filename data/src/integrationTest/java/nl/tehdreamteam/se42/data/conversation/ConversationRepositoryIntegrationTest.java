@@ -7,11 +7,14 @@ import nl.tehdreamteam.se42.domain.Conversation;
 import nl.tehdreamteam.se42.domain.LoginCredentials;
 import nl.tehdreamteam.se42.domain.Message;
 import nl.tehdreamteam.se42.domain.User;
+import org.hamcrest.CoreMatchers;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.internal.matchers.apachecommons.ReflectionEquals;
+
+import java.util.List;
 
 /**
  * @author Oscar de Leeuw
@@ -47,12 +50,11 @@ public class ConversationRepositoryIntegrationTest {
     public void updateAndGet_whenCalled_updatesConversationAndPersists() throws Exception {
         saveConversation();
         addMessage();
-        saveConversation();
-        verifyConversationIsAdded();
+        verifyMessageIsAdded();
     }
 
     private void addMessage() {
-        conversation.addMessage(new Message("Henk is een rare jongen", user));
+        repository.addMessage(conversation.getId(), new Message("Henk is een rare jongen", user));
     }
 
     private void saveConversation() {
@@ -60,9 +62,16 @@ public class ConversationRepositoryIntegrationTest {
     }
 
     private void verifyConversationIsAdded() {
-        Conversation conv = repository.find(conversation.getId());
+        Conversation conv = repository.get(conversation.getId());
 
         Assert.assertTrue(new ReflectionEquals(conv).matches(conversation));
+    }
+
+    private void verifyMessageIsAdded() {
+        List<Message> messages = repository.get(conversation.getId()).getMessages();
+        Message message = messages.get(messages.size() - 1);
+
+        Assert.assertThat(message.getContent(), CoreMatchers.is("Henk is een rare jongen"));
     }
 
     private void removeConversation() {
