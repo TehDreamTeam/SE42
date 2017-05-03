@@ -22,4 +22,5 @@ public class ConversationHibernateDAO extends HibernateDAO<Long, Conversation> i
     public ConversationHibernateDAO(EntityManager entityManager, Class<Conversation> type) {
         super(entityManager, type);
     }
+
 }

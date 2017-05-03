@@ -22,7 +22,7 @@ public class User {
     private Long id;
     @Embedded
     private LoginCredentials loginCredentials;
-    @ManyToMany(mappedBy = "participants", cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "participants", cascade = CascadeType.MERGE)
     private List<Conversation> conversations;
 
     protected User() {
