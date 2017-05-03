@@ -8,6 +8,8 @@
         <class>nl.tehdreamteam.se42.domain.User</class>
         <class>nl.tehdreamteam.se42.domain.LoginCredentials</class>
         <class>nl.tehdreamteam.se42.domain.Conversation</class>
+        <class>nl.tehdreamteam.se42.domain.message.TextMessage</class>
+        <class>nl.tehdreamteam.se42.domain.message.ImageMessage</class>
 
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL57Dialect"/>

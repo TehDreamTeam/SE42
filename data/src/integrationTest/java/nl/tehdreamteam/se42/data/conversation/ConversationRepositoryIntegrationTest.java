@@ -7,6 +7,7 @@ import nl.tehdreamteam.se42.domain.Conversation;
 import nl.tehdreamteam.se42.domain.LoginCredentials;
 import nl.tehdreamteam.se42.domain.Message;
 import nl.tehdreamteam.se42.domain.User;
+import nl.tehdreamteam.se42.domain.message.TextMessage;
 import org.hamcrest.CoreMatchers;
 import org.junit.After;
 import org.junit.Assert;
@@ -54,7 +55,7 @@ public class ConversationRepositoryIntegrationTest {
     }
 
     private void addMessage() {
-        conversation.addMessage(new Message("Henk is een rare jongen", user));
+        conversation.addMessage(new TextMessage("Henk is een rare jongen", user));
         repository.save(conversation);
     }
 
@@ -95,8 +96,8 @@ public class ConversationRepositoryIntegrationTest {
         Conversation conv = new Conversation();
         conv.addUser(user);
 
-        conv.addMessage(new Message("Test1", user));
-        conv.addMessage(new Message("Test2", user));
+        conv.addMessage(new TextMessage("Test1", user));
+        conv.addMessage(new TextMessage("Test2", user));
 
         return conv;
     }
