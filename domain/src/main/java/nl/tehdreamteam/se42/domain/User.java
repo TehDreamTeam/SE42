@@ -39,6 +39,10 @@ public class User {
         this.conversations = new LinkedList<>();
     }
 
+    public long getId() {
+        return id;
+    }
+
     public LoginCredentials getLoginCredentials() {
         return loginCredentials;
     }
