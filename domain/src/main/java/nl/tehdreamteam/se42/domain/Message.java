@@ -1,11 +1,6 @@
 package nl.tehdreamteam.se42.domain;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 /**
@@ -22,7 +17,7 @@ public class Message {
     @GeneratedValue
     private Long id;
     private String content;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.MERGE)
     private User sender;
     private LocalDateTime time;
 

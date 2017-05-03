@@ -18,7 +18,7 @@ public class Conversation {
     @Id
     @GeneratedValue
     private Long id;
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(name = "jnd_conv_usr", inverseJoinColumns = @JoinColumn(name = "user_fk"), joinColumns = @JoinColumn(name = "conv_fk"))
     private List<User> participants;
     @OneToMany(cascade = CascadeType.ALL)
@@ -46,12 +46,16 @@ public class Conversation {
         this.messages = messages;
     }
 
+    public Long getId() {
+        return id;
+    }
+
     public List<User> getParticipants() {
-        return participants;
+        return new LinkedList<>(participants);
     }
 
     public List<Message> getMessages() {
-        return messages;
+        return new LinkedList<>(messages);
     }
 
     /**

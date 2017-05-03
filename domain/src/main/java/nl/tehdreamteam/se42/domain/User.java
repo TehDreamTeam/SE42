@@ -1,14 +1,6 @@
 package nl.tehdreamteam.se42.domain;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -30,7 +22,7 @@ public class User {
     private Long id;
     @Embedded
     private LoginCredentials loginCredentials;
-    @ManyToMany(mappedBy = "participants", cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "participants", cascade = CascadeType.MERGE)
     private List<Conversation> conversations;
 
     protected User() {
