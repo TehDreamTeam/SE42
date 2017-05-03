@@ -11,12 +11,12 @@ import java.time.LocalDateTime;
  */
 @Entity
 @Table(name = "message")
-public class Message {
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+public abstract class Message<T> {
 
     @Id
     @GeneratedValue
     private Long id;
-    private String content;
     @OneToOne(cascade = CascadeType.MERGE)
     private User sender;
     private LocalDateTime time;
@@ -28,21 +28,11 @@ public class Message {
     /**
      * Creates a new Message.
      *
-     * @param content The content of the Message.
      * @param sender  The sender of the Message.
      */
-    public Message(String content, User sender) {
-        this.content = content;
+    public Message(User sender) {
         this.sender = sender;
         time = LocalDateTime.now();
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
     }
 
     public User getSender() {
@@ -61,8 +51,5 @@ public class Message {
         this.time = time;
     }
 
-    @Override
-    public String toString() {
-        return String.format("%tT %s: %s", time, sender.getLoginCredentials().getUsername(), content);
-    }
+    public abstract T getContent();
 }
