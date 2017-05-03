@@ -4,11 +4,8 @@ import nl.tehdreamteam.se42.data.conversation.ConversationDAO;
 import nl.tehdreamteam.se42.data.conversation.ConversationRepository;
 import nl.tehdreamteam.se42.data.repository.HibernateRepository;
 import nl.tehdreamteam.se42.domain.Conversation;
-import nl.tehdreamteam.se42.domain.Message;
-import nl.tehdreamteam.se42.domain.User;
 
 import javax.persistence.EntityManager;
-import java.util.List;
 import java.util.function.Function;
 
 /**
@@ -34,16 +31,25 @@ public class ConversationHibernateRepository extends HibernateRepository<Long, C
     }
 
     @Override
-    public List<Conversation> getConversationsForUser(User user) {
-        Function<ConversationDAO, List<Conversation>> function = dao -> dao.findByUser(user);
+    public Conversation find(long id) {
+        Function<ConversationDAO, Conversation> function = dao -> dao.find(id);
 
         return super.performTransaction(function);
     }
 
     @Override
-    public List<Message> getMessagesForConversation(long id) {
-        Function<ConversationDAO, List<Message>> function = dao -> dao.findMessagesById(id);
+    public void remove(long id) {
+        Conversation conversation = find(id);
+        remove(conversation);
+    }
 
-        return super.performTransaction(function);
+    @Override
+    public void remove(Conversation conversation) {
+        Function<ConversationDAO, Void> function = dao -> {
+            dao.remove(conversation);
+            return null;
+        };
+
+        super.performTransaction(function);
     }
 }
