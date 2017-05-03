@@ -51,6 +51,7 @@ public abstract class HibernateDAO<I, T> implements DAO<I, T> {
 
     @Override
     public void remove(T object) {
-        em.remove(object);
+        em.remove(em.contains(object) ? object : em.merge(object));
     }
+
 }

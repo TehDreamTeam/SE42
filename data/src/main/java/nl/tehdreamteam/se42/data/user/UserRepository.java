@@ -24,4 +24,11 @@ public interface UserRepository {
      */
     void save(User user);
 
+    /**
+     * Deletes a {@link User} from the database.
+     *
+     * @param user The {@code user} to delete from the database.
+     */
+    void delete(User user);
+
 }
