@@ -32,18 +32,30 @@ public final class UserRepositoryIntegrationTest {
         givenDefaultUser();
 
         saveUser();
-
         verifyUserIsAdded();
     }
 
     @Test
-    public void removeUserById_whenCalled_deletesUser() {
+    public void removeUser_whenCalled_removesUserFromPersistence() {
         givenHibernateUserRepository();
         givenDefaultUser();
 
         saveUser();
-        removeUserById();
+        verifyUserIsAdded();
 
+        removeUser();
+        verifyUserIsNotAdded();
+    }
+
+    @Test
+    public void removeUserById_whenCalled_removesUserFromPersistence() {
+        givenHibernateUserRepository();
+        givenDefaultUser();
+
+        saveUser();
+        verifyUserIsAdded();
+
+        removeUserById();
         verifyUserIsNotAdded();
     }
 
@@ -55,7 +67,7 @@ public final class UserRepositoryIntegrationTest {
     }
 
     @After
-    public void resetPersistency() {
+    public void resetPersistence() {
         if (!deleted) {
             removeUser();
         }
