@@ -28,7 +28,7 @@ public abstract class HibernateRepository<I, T, D extends DAO<I, T>> {
      *
      * @param object The object that should be saved to the database.
      */
-    public void create(T object) {
+    protected void create(T object) {
         Function<D, Void> createFunction = dao -> {
             dao.create(object);
             return null;
@@ -42,7 +42,7 @@ public abstract class HibernateRepository<I, T, D extends DAO<I, T>> {
      *
      * @param object The object that should be updated in the database.
      */
-    public void edit(T object) {
+    protected void edit(T object) {
         Function<D, Void> editFunction = dao -> {
             dao.edit(object);
             return null;
@@ -57,7 +57,7 @@ public abstract class HibernateRepository<I, T, D extends DAO<I, T>> {
      * @param i The id of the object.
      * @return The object with the given i from the database.
      */
-    public T find(I i) {
+    protected T find(I i) {
         Function<D, T> findFunction = dao -> dao.find(i);
 
         return performTransaction(findFunction);
@@ -68,7 +68,7 @@ public abstract class HibernateRepository<I, T, D extends DAO<I, T>> {
      *
      * @return A List with all the objects.
      */
-    public List<T> findAll() {
+    protected List<T> findAll() {
         Function<D, List<T>> findAllFunction = DAO::findAll;
 
         return performTransaction(findAllFunction);
@@ -79,7 +79,7 @@ public abstract class HibernateRepository<I, T, D extends DAO<I, T>> {
      *
      * @param object The object that should be removed from the database.
      */
-    public void remove(T object) {
+    protected void remove(T object) {
         Function<D, Void> removeFunction = dao -> {
             dao.remove(object);
             return null;
