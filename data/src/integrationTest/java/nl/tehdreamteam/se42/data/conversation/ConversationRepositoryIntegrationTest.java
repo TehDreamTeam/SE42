@@ -7,11 +7,14 @@ import nl.tehdreamteam.se42.domain.Conversation;
 import nl.tehdreamteam.se42.domain.LoginCredentials;
 import nl.tehdreamteam.se42.domain.Message;
 import nl.tehdreamteam.se42.domain.User;
+import org.hamcrest.CoreMatchers;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.internal.matchers.apachecommons.ReflectionEquals;
+
+import java.util.List;
 
 /**
  * @author Oscar de Leeuw
@@ -43,6 +46,17 @@ public class ConversationRepositoryIntegrationTest {
         verifyConversationIsAdded();
     }
 
+    @Test
+    public void updateAndGet_whenCalled_updatesConversationAndPersists() throws Exception {
+        saveConversation();
+        addMessage();
+        verifyMessageIsAdded();
+    }
+
+    private void addMessage() {
+        repository.addMessage(conversation.getId(), new Message("Henk is een rare jongen", user));
+    }
+
     private void saveConversation() {
         repository.save(conversation);
     }
@@ -51,20 +65,21 @@ public class ConversationRepositoryIntegrationTest {
         Conversation conv = repository.get(conversation.getId());
 
         Assert.assertTrue(new ReflectionEquals(conv).matches(conversation));
+    }
 
-       /* Assert.assertEquals(2, conv.getMessages().size());
-        Assert.assertEquals(1, conv.getParticipants().size());
-        Assert.assertTrue(conv.getMessages().stream().anyMatch(s -> s.getContent().equals("Test1")));
-        Assert.assertTrue(conv.getMessages().stream().anyMatch(s -> s.getContent().equals("Test2")));
-        Assert.assertTrue(conv.getParticipants().stream().anyMatch(u -> u.getLoginCredentials().getUsername().equals("username")));*/
+    private void verifyMessageIsAdded() {
+        List<Message> messages = repository.get(conversation.getId()).getMessages();
+        Message message = messages.get(messages.size() - 1);
+
+        Assert.assertThat(message.getContent(), CoreMatchers.is("Henk is een rare jongen"));
     }
 
     private void removeConversation() {
-        repository.remove(conversation);
+        repository.remove(conversation.getId());
     }
 
     private void removeUser() {
-        userRepository.remove(user);
+        userRepository.remove(user.getId());
     }
 
     private ConversationRepository getRepository() {

@@ -4,6 +4,7 @@ import nl.tehdreamteam.se42.data.conversation.ConversationDAO;
 import nl.tehdreamteam.se42.data.conversation.ConversationRepository;
 import nl.tehdreamteam.se42.data.repository.HibernateRepository;
 import nl.tehdreamteam.se42.domain.Conversation;
+import nl.tehdreamteam.se42.domain.Message;
 
 import javax.persistence.EntityManager;
 
@@ -38,5 +39,17 @@ public class ConversationHibernateRepository extends HibernateRepository<Long, C
     @Override
     public void remove(Conversation conversation) {
         super.remove(conversation);
+    }
+
+    @Override
+    public void addMessage(long conversationId, Message message) {
+        Conversation conv = get(conversationId);
+        addMessage(conv, message);
+    }
+
+    @Override
+    public void addMessage(Conversation conversation, Message message) {
+        conversation.addMessage(message);
+        edit(conversation);
     }
 }
