@@ -54,7 +54,8 @@ public class ConversationRepositoryIntegrationTest {
     }
 
     private void addMessage() {
-        repository.addMessage(conversation.getId(), new Message("Henk is een rare jongen", user));
+        conversation.addMessage(new Message("Henk is een rare jongen", user));
+        repository.save(conversation);
     }
 
     private void saveConversation() {
