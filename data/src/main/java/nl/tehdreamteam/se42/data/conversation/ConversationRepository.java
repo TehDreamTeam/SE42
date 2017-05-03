@@ -1,7 +1,6 @@
 package nl.tehdreamteam.se42.data.conversation;
 
 import nl.tehdreamteam.se42.domain.Conversation;
-import nl.tehdreamteam.se42.domain.Message;
 
 /**
  * A {@code ConversationRepository} defines methods that can be used to get or update {@link Conversation conversations}.
@@ -40,21 +39,4 @@ public interface ConversationRepository {
      * @param conversation The {@code Conversation} that should be deleted.
      */
     void remove(Conversation conversation);
-
-    /**
-     * Adds a {@code Message} to a {@code Conversation} with the given id.
-     * Find the {@code Conversation} object with the given id under water.
-     *
-     * @param conversationId The id of the {@code Conversation}.
-     * @param message        The {@code Message} that should be added to the {@code Conversation}.
-     */
-    void addMessage(long conversationId, Message message);
-
-    /**
-     * Adds a {@code Message} to a given {@code Conversation}.
-     *
-     * @param conversation The {@code Conversation} to which the {@code Message} should be added.
-     * @param message      The {@code Message} that should be added to the {@code Conversation}.
-     */
-    void addMessage(Conversation conversation, Message message);
 }
