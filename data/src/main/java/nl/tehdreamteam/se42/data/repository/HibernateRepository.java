@@ -1,12 +1,10 @@
 package nl.tehdreamteam.se42.data.repository;
 
-import nl.tehdreamteam.se42.data.DataConstants;
+import nl.tehdreamteam.se42.data.EntityManagerLocator;
 import nl.tehdreamteam.se42.data.dao.DAO;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
 import java.util.List;
 import java.util.function.Function;
 
@@ -21,7 +19,11 @@ import java.util.function.Function;
  */
 public abstract class HibernateRepository<I, T, D extends DAO<I, T>> {
 
-    private final EntityManagerFactory factory = Persistence.createEntityManagerFactory(DataConstants.HIBERNATE_PERSISTENCY_UNIT_NAME);
+    private final EntityManager manager;
+
+    protected HibernateRepository() {
+        manager = EntityManagerLocator.getManager();
+    }
 
     /**
      * Creates a record in the database for the given object.
@@ -90,41 +92,45 @@ public abstract class HibernateRepository<I, T, D extends DAO<I, T>> {
 
     /**
      * Performs a {@link EntityTransaction} using a given function. This method performs the following steps, in order:
-     * 1. Start a {@code EntityTransaction} (See {@link #beginTransaction(EntityManager)}.
+     * 1. Start a {@code EntityTransaction} (See {@link #beginTransaction()}.
      * 2. Create a {@link DAO} (See {@link #createDao(EntityManager)}.
      * 3. Execute the given {@code function}.
-     * 4. Commit and close the {@code EntityTransaction} (See {@link #commitAndCloseTransaction(EntityManager)}.
+     * 4. Commit the {@code EntityTransaction} (See {@link #commitTransaction()}).
      *
      * @param function The {@code function} to execute in a {@code EntityTransaction}.
      * @param <R>      The return type of the given {@code function}.
      * @return An object fetched from the database, conform the requested type ({@code <R>}).
      */
     protected <R> R performTransaction(Function<D, R> function) {
-        EntityManager manager = factory.createEntityManager();
-        beginTransaction(manager);
+        try {
+            beginTransaction();
 
-        D dao = createDao(manager);
-        R value = function.apply(dao);
+            D dao = createDao(manager);
+            R value = function.apply(dao);
 
-        commitAndCloseTransaction(manager);
+            commitTransaction();
 
-        return value;
+            return value;
+        } catch (Exception e) {
+            rollbackTransaction();
+
+            throw e;
+        }
     }
 
-    private void beginTransaction(EntityManager manager) {
+    private void beginTransaction() {
         manager.getTransaction().begin();
     }
 
-    private void commitAndCloseTransaction(EntityManager manager) {
-        commitTransaction(manager);
-        closeManager(manager);
-    }
-
-    private void commitTransaction(EntityManager manager) {
+    private void commitTransaction() {
         manager.getTransaction().commit();
     }
 
-    private void closeManager(EntityManager manager) {
+    private void rollbackTransaction() {
+        manager.getTransaction().rollback();
+    }
+
+    private void closeManager() {
         manager.close();
     }
 
