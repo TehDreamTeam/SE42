@@ -1,6 +1,8 @@
 package nl.tehdreamteam.se42.web.soap.user;
 
 import nl.tehdreamteam.se42.web.controller.UserController;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.jws.WebParam;
 import javax.jws.WebService;
@@ -11,8 +13,12 @@ import javax.jws.WebService;
 @WebService
 public class SoapUserController implements UserController {
 
+    private final Logger logger = LogManager.getLogger(getClass().getSimpleName());
+
     @Override
     public String login(@WebParam(name = "username") String username, @WebParam(name = "password") String password) {
+        logger.debug("Soap request for login (username='{}', password='{}').", username, password);
+
         return username + "-" + password;
     }
 

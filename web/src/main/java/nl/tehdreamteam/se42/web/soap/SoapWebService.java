@@ -32,7 +32,7 @@ public class SoapWebService implements Service {
         registerEndpoints();
         started.set(true);
 
-        logger.info("Soap service started on {}.", DEFAULT_URL);
+        logger.info("Soap service started on '{}'.", DEFAULT_URL);
     }
 
     @Override
@@ -44,7 +44,7 @@ public class SoapWebService implements Service {
         stopEndpoints();
         started.set(false);
 
-        logger.info("Soap service stopped on {}.", DEFAULT_URL);
+        logger.info("Soap service stopped on '{}'.", DEFAULT_URL);
     }
 
     private void registerEndpoints() {
@@ -57,7 +57,7 @@ public class SoapWebService implements Service {
 
         endpoints.add(endpoint);
 
-        logger.debug("Soap endpoint {} bound on {}.", implementor.getClass().getSimpleName(), url);
+        logger.debug("Soap endpoint '{}' bound on '{}'.", implementor.getClass().getSimpleName(), url);
     }
 
     private void stopEndpoints() {
