@@ -1,4 +1,4 @@
-package nl.tehdreamteam.se42.web.user;
+package nl.tehdreamteam.se42.web.controller;
 
 import nl.tehdreamteam.se42.domain.User;
 

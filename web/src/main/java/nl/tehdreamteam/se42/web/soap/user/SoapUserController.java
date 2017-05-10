@@ -1,6 +1,6 @@
 package nl.tehdreamteam.se42.web.soap.user;
 
-import nl.tehdreamteam.se42.web.user.UserController;
+import nl.tehdreamteam.se42.web.controller.UserController;
 
 import javax.jws.WebParam;
 import javax.jws.WebService;
