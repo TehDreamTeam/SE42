@@ -1,7 +1,11 @@
 package nl.tehdreamteam.se42.web.controller;
 
 import nl.tehdreamteam.se42.domain.User;
+import nl.tehdreamteam.se42.web.Service;
 
+/**
+ * Defines functions that specific {@link Service Services} can use to serve content.
+ */
 public interface UserController {
 
     /**
@@ -12,6 +16,6 @@ public interface UserController {
      * @param password The {@code password} of the {@code User} to login.
      * @return A {@code Token value} that temporarily identifies the logged-in {@code User}.
      */
-    String login(String username, String password);
+    String login(String username, String password); // TODO, should not be a String, probably a dedicated Token class
 
 }
