@@ -13,7 +13,7 @@ import javax.jws.WebService;
 @WebService
 public class SoapUserController implements UserController {
 
-    private final Logger logger = LogManager.getLogger(getClass().getSimpleName());
+    private static final Logger logger = LogManager.getLogger(SoapUserController.class.getSimpleName());
 
     @Override
     public String login(@WebParam(name = "username") String username, @WebParam(name = "password") String password) {

@@ -17,7 +17,7 @@ import static nl.tehdreamteam.se42.web.soap.SoapWebServiceConstants.DEFAULT_URL;
  */
 public class SoapWebService implements Service {
 
-    private final Logger logger = LogManager.getLogger(getClass().getSimpleName());
+    private static final Logger logger = LogManager.getLogger(SoapWebService.class.getSimpleName());
 
     private final AtomicBoolean started = new AtomicBoolean(false);
 
