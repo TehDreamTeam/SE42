@@ -2,15 +2,18 @@ package nl.tehdreamteam.se42.web.soap.conversation;
 
 import nl.tehdreamteam.se42.domain.Message;
 import nl.tehdreamteam.se42.web.controller.ConversationController;
+import nl.tehdreamteam.se42.web.soap.SoapWebServiceConstants;
 
 import javax.jws.WebParam;
 import javax.jws.WebService;
 import java.util.List;
 
 /**
+ * Webservice for controlling Soap request concerning {@code Conversations}.
+ *
  * @author Oscar de Leeuw
  */
-@WebService
+@WebService(targetNamespace = SoapWebServiceConstants.DEFAULT_NAMESPACE + "conversation")
 public class SoapConversationController implements ConversationController {
     @Override
     public void addMessage(@WebParam(name = "token") String token, @WebParam(name = "content") String content, @WebParam(name = "conversation_id") long conversationId) {
