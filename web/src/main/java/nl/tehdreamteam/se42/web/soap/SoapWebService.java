@@ -1,6 +1,7 @@
 package nl.tehdreamteam.se42.web.soap;
 
 import nl.tehdreamteam.se42.web.Service;
+import nl.tehdreamteam.se42.web.soap.conversation.SoapConversationController;
 import nl.tehdreamteam.se42.web.soap.user.SoapUserController;
 
 import javax.xml.ws.Endpoint;
@@ -42,7 +43,8 @@ public class SoapWebService implements Service {
     }
 
     private void registerEndpoints() {
-        addEndpoint(DEFAULT_URL, new SoapUserController());
+        addEndpoint(DEFAULT_URL + "user", new SoapUserController());
+        addEndpoint(DEFAULT_URL + "conversation", new SoapConversationController());
     }
 
     private void addEndpoint(String url, Object implementor) {
