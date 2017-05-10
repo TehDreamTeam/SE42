@@ -5,6 +5,9 @@ import nl.tehdreamteam.se42.web.controller.UserController;
 import javax.jws.WebParam;
 import javax.jws.WebService;
 
+/**
+ * Implementation of {@link UserController} that receives and serves SOAP messages.
+ */
 @WebService
 public class SoapUserController implements UserController {
 
