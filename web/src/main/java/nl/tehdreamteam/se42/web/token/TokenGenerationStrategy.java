@@ -7,6 +7,7 @@ import nl.tehdreamteam.se42.domain.User;
  *
  * @author Oscar de Leeuw
  */
+@FunctionalInterface
 public interface TokenGenerationStrategy {
 
     /**
