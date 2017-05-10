@@ -2,6 +2,8 @@ package nl.tehdreamteam.se42.web.soap;
 
 import nl.tehdreamteam.se42.web.Service;
 import nl.tehdreamteam.se42.web.soap.user.SoapUserController;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.xml.ws.Endpoint;
 import java.util.ArrayList;
@@ -15,6 +17,8 @@ import static nl.tehdreamteam.se42.web.soap.SoapWebServiceConstants.DEFAULT_URL;
  */
 public class SoapWebService implements Service {
 
+    private static final Logger logger = LogManager.getLogger(SoapWebService.class.getSimpleName());
+
     private final AtomicBoolean started = new AtomicBoolean(false);
 
     private final List<Endpoint> endpoints = new ArrayList<>();
@@ -26,8 +30,9 @@ public class SoapWebService implements Service {
         }
 
         registerEndpoints();
-
         started.set(true);
+
+        logger.info("Soap service started on '{}'.", DEFAULT_URL);
     }
 
     @Override
@@ -37,8 +42,9 @@ public class SoapWebService implements Service {
         }
 
         stopEndpoints();
-
         started.set(false);
+
+        logger.info("Soap service stopped on '{}'.", DEFAULT_URL);
     }
 
     private void registerEndpoints() {
@@ -50,6 +56,8 @@ public class SoapWebService implements Service {
         endpoint.publish(url);
 
         endpoints.add(endpoint);
+
+        logger.debug("Soap endpoint '{}' bound on '{}'.", implementor.getClass().getSimpleName(), url);
     }
 
     private void stopEndpoints() {
