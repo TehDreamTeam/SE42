@@ -9,7 +9,7 @@
 
         <Console name="Console">
             <PatternLayout>
-                <Pattern>%highlight{(%date) [%level]: %message%n%throwable}</Pattern>
+                <Pattern>%highlight{(%date) [%level]: %message%throwable{short.message}%n}</Pattern>
             </PatternLayout>
         </Console>
     </Appenders>

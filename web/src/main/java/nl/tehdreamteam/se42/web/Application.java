@@ -49,7 +49,7 @@ public final class Application {
         try {
             handler.handle(line);
         } catch (Exception e) {
-            logger.error("Failed to execute command: {}.", e.getMessage());
+            logger.error("Failed to execute command.", e);
         }
     }
 
