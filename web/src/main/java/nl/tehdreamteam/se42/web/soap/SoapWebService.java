@@ -26,7 +26,8 @@ public class SoapWebService implements Service {
     @Override
     public void start() {
         if (isActive()) {
-            throw new IllegalStateException("Soap service already started.");
+            logger.debug("Soap service already started, ignoring start.");
+            return;
         }
 
         registerEndpoints();
@@ -38,7 +39,8 @@ public class SoapWebService implements Service {
     @Override
     public void stop() {
         if (!isActive()) {
-            throw new IllegalStateException("Soap service already stopped.");
+            logger.debug("Soap service already stopped, ignoring stop.");
+            return;
         }
 
         stopEndpoints();
