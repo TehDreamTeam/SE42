@@ -1,6 +1,6 @@
 package nl.tehdreamteam.se42.web.soap;
 
-import nl.tehdreamteam.se42.web.Service;
+import nl.tehdreamteam.se42.web.service.Service;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
@@ -27,14 +27,13 @@ public class SoapWebServiceTest {
     }
 
     @Test
-    public void start_whenAlreadyStarted_throwsException() {
-        expectedException.expect(IllegalStateException.class);
-        expectedException.expectMessage("Soap service already started.");
-
+    public void start_whenAlreadyStarted_ignoresCallAndRemainsActive() {
         givenSoapWebService();
         startService();
 
         startService();
+
+        verifyServiceIsActive();
     }
 
     @Test
@@ -44,17 +43,16 @@ public class SoapWebServiceTest {
 
         stopService();
 
-        verifyServiceIsNotActive();
+        verifyServiceIsInactive();
     }
 
     @Test
-    public void stop_whenAlreadyStopped_throwsException() {
-        expectedException.expect(IllegalStateException.class);
-        expectedException.expectMessage("Soap service already stopped.");
-
+    public void stop_whenAlreadyStopped_ignoresCallAndRemainsInactive() {
         givenSoapWebService();
 
         stopService();
+
+        verifyServiceIsInactive();
     }
 
     @Before
@@ -73,7 +71,7 @@ public class SoapWebServiceTest {
         verifyServiceIsActive(true);
     }
 
-    private void verifyServiceIsNotActive() {
+    private void verifyServiceIsInactive() {
         verifyServiceIsActive(false);
     }
 

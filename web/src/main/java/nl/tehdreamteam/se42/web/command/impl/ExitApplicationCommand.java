@@ -1,9 +1,9 @@
 package nl.tehdreamteam.se42.web.command.impl;
 
-import nl.tehdreamteam.se42.web.Service;
-import nl.tehdreamteam.se42.web.ServiceContainer;
 import nl.tehdreamteam.se42.web.command.Command;
 import nl.tehdreamteam.se42.web.command.CommandHandler;
+import nl.tehdreamteam.se42.web.service.Service;
+import nl.tehdreamteam.se42.web.service.ServiceContainer;
 
 /**
  * A {@link Command} that exits the Application.
@@ -35,7 +35,7 @@ public class ExitApplicationCommand implements Command {
 
     @Override
     public String getDescription() {
-        return "Firstly stops all active services, and then stops the Application.";
+        return "Firstly stops all active services, and then stops the Application";
     }
 
     @Override

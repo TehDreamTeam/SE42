@@ -1,9 +1,9 @@
 package nl.tehdreamteam.se42.web.command.impl;
 
-import nl.tehdreamteam.se42.web.Service;
-import nl.tehdreamteam.se42.web.ServiceContainer;
 import nl.tehdreamteam.se42.web.command.Command;
 import nl.tehdreamteam.se42.web.command.CommandHandler;
+import nl.tehdreamteam.se42.web.service.Service;
+import nl.tehdreamteam.se42.web.service.ServiceContainer;
 
 /**
  * A {@link Command} that stops all active {@link Service Services}.
@@ -33,7 +33,7 @@ public class StopServicesCommand implements Command {
 
     @Override
     public String getDescription() {
-        return "Stops all active services.";
+        return "Stops all active services";
     }
 
     @Override

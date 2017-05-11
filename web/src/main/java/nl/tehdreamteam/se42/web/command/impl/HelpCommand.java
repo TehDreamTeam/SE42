@@ -14,9 +14,24 @@ public class HelpCommand implements Command {
 
     @Override
     public void execute(CommandHandler handler, String line, String[] args) {
-        Command command = handler.getCommand(args[0]);
+        verifyCorrectArguments(args);
 
-        logger.info("{}: {}", command.getName(), command.getDescription());
+        Command command = handler.getCommand(args[0]);
+        verifyCorrectCommand(command);
+
+        logger.info("{}: {}.", command.getName(), command.getDescription());
+    }
+
+    private void verifyCorrectArguments(String[] args) {
+        if (args.length == 0) {
+            throw new IllegalArgumentException("No command specified");
+        }
+    }
+
+    private void verifyCorrectCommand(Command command) {
+        if (command == null) {
+            throw new NullPointerException("Command not found");
+        }
     }
 
     @Override
