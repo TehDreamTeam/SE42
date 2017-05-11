@@ -45,17 +45,13 @@ public class CommandHandler {
         String[] splits = line.split(COMMAND_ARGUMENT_SPLIT_TOKEN);
 
         String identifier = parseIdentifierFromLine(line);
-        String input = splits.length > 1 ? line.substring(identifier.length() + 1) : "";
-
-        return input;
+        return splits.length > 1 ? line.substring(identifier.length() + 1) : "";
     }
 
     private String[] parseArgumentsFromLine(String line) {
         String[] splits = line.split(COMMAND_ARGUMENT_SPLIT_TOKEN);
 
-        String[] arguments = Arrays.copyOfRange(splits, 1, splits.length);
-
-        return arguments;
+        return Arrays.copyOfRange(splits, 1, splits.length);
     }
 
     private void handle(String identifier, String input, String[] args) {
