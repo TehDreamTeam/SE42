@@ -1,6 +1,8 @@
 package nl.tehdreamteam.se42.web.command;
 
 import nl.tehdreamteam.se42.web.command.impl.HelpCommand;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -12,6 +14,7 @@ import java.util.Objects;
  */
 public class CommandHandler {
 
+    private static final Logger logger = LogManager.getLogger(CommandHandler.class.getSimpleName());
     private static final String COMMAND_ARGUMENT_SPLIT_TOKEN = " ";
 
     private final Map<String, Command> commands = new HashMap<>();
@@ -58,10 +61,12 @@ public class CommandHandler {
     private void handle(String identifier, String input, String[] args) {
         Command command = getCommand(identifier);
         if (command == null) {
-            throw new NullPointerException("Command with the given identifier not registered.");
+            throw new NullPointerException(String.format("Command with identifier '%s' not registered", identifier));
         }
 
         command.execute(this, input, args);
+
+        logger.debug("Executed command '{}'.", command.getName());
     }
 
     /**
@@ -84,11 +89,14 @@ public class CommandHandler {
     public void register(Command command) {
         verifyValidCommand(command);
 
-        Arrays.stream(command.getIdentifiers()).forEach(i -> register(i, command));
+        String[] identifiers = command.getIdentifiers();
+        Arrays.stream(identifiers).forEach(i -> register(i, command));
     }
 
     private void register(String identifier, Command command) {
         commands.put(identifier, command);
+
+        logger.debug("Command '{}' registered under identifier '{}'.", command.getName(), identifier);
     }
 
     /**
@@ -104,6 +112,8 @@ public class CommandHandler {
 
     private void deregister(String identifier, Command command) {
         commands.remove(identifier, command);
+
+        logger.debug("Command '{}' deregistered under identifier '{}'.", command.getName(), identifier);
     }
 
     private void verifyValidCommand(Command command) {
@@ -111,7 +121,7 @@ public class CommandHandler {
 
         String[] identifiers = command.getIdentifiers();
         if (identifiers == null || identifiers.length == 0) {
-            throw new NullPointerException("This command has no identifiers.");
+            throw new NullPointerException(String.format("Command '%s' has no identifiers", command.getName()));
         }
     }
 
