@@ -42,4 +42,8 @@ public class SoapUserController implements UserController {
         return Arrays.asList(1L, 2L, 4L);
     }
 
+    @Override
+    public long registerUser(String username, String password) {
+        return 0;
+    }
 }

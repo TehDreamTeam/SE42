@@ -21,6 +21,15 @@ public interface UserController {
     String login(String username, String password);
 
     /**
+     * Registers a new {@link User} with the chat application.
+     *
+     * @param username The username of the {@code User}.
+     * @param password The password of the {@code User}.
+     * @return A long that represents the id of the {@code User}.
+     */
+    long registerUser(String username, String password);
+
+    /**
      * Gets a List of all the ids of the {@code Conversations} that the user participates in.
      *
      * @param token A valid token that is needed to verify a user.
