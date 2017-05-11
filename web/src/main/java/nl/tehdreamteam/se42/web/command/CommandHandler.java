@@ -78,7 +78,7 @@ public class CommandHandler {
     public Command getCommand(String identifier) {
         Objects.requireNonNull(identifier);
 
-        return commands.get(identifier);
+        return commands.get(identifier.toLowerCase());
     }
 
     /**
@@ -94,7 +94,7 @@ public class CommandHandler {
     }
 
     private void register(String identifier, Command command) {
-        commands.put(identifier, command);
+        commands.put(identifier.toLowerCase(), command);
 
         logger.debug("Command '{}' registered under identifier '{}'.", command.getName(), identifier);
     }
@@ -111,7 +111,7 @@ public class CommandHandler {
     }
 
     private void deregister(String identifier, Command command) {
-        commands.remove(identifier, command);
+        commands.remove(identifier.toLowerCase(), command);
 
         logger.debug("Command '{}' deregistered under identifier '{}'.", command.getName(), identifier);
     }
