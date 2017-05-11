@@ -10,6 +10,8 @@ import java.util.Objects;
  */
 public class CommandHandler {
 
+    private static final String COMMAND_ARGUMENT_SPLIT_TOKEN = " ";
+
     private final Map<String, Command> commands = new HashMap<>();
 
     /**
@@ -20,12 +22,34 @@ public class CommandHandler {
     public void handle(String line) {
         Objects.requireNonNull(line);
 
-        String[] splits = line.split(" ");
-
-        String identifier = splits[0];
-        String input = splits.length > 1 ? line.substring(identifier.length() + 1) : "";
-        String[] arguments = Arrays.copyOfRange(splits, 1, splits.length);
+        String identifier = parseIdentifierFromLine(line);
+        String input = parseInputFromLine(line);
+        String[] arguments = parseArgumentsFromLine(line);
         handle(identifier, input, arguments);
+    }
+
+    private String parseIdentifierFromLine(String line) {
+        String[] splits = line.split(COMMAND_ARGUMENT_SPLIT_TOKEN);
+        String identifier = splits[0];
+
+        return identifier;
+    }
+
+    private String parseInputFromLine(String line) {
+        String[] splits = line.split(COMMAND_ARGUMENT_SPLIT_TOKEN);
+
+        String identifier = parseIdentifierFromLine(line);
+        String input = splits.length > 1 ? line.substring(identifier.length() + 1) : "";
+
+        return input;
+    }
+
+    private String[] parseArgumentsFromLine(String line) {
+        String[] splits = line.split(COMMAND_ARGUMENT_SPLIT_TOKEN);
+
+        String[] arguments = Arrays.copyOfRange(splits, 1, splits.length);
+
+        return arguments;
     }
 
     private void handle(String identifier, String input, String[] args) {
