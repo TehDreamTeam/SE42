@@ -8,7 +8,7 @@ import nl.tehdreamteam.se42.web.command.CommandHandler;
 /**
  * A {@link Command} that starts all inactive {@link Service Services}.
  */
-public class StartServicesCommand extends Command {
+public class StartServicesCommand implements Command {
 
     private final ServiceContainer container;
 

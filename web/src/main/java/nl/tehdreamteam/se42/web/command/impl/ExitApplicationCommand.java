@@ -8,7 +8,7 @@ import nl.tehdreamteam.se42.web.command.CommandHandler;
 /**
  * A {@link Command} that exits the Application.
  */
-public class ExitApplicationCommand extends Command {
+public class ExitApplicationCommand implements Command {
 
     private final ServiceContainer container;
 

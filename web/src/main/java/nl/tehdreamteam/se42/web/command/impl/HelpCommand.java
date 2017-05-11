@@ -8,7 +8,7 @@ import org.apache.logging.log4j.Logger;
 /**
  * A {@link Command} that provides 'help' about other {@code Commands}.
  */
-public class HelpCommand extends Command {
+public class HelpCommand implements Command {
 
     private static final Logger logger = LogManager.getLogger(HelpCommand.class.getSimpleName());
 

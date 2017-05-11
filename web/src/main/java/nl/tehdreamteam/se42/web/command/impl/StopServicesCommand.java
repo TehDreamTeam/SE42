@@ -8,7 +8,7 @@ import nl.tehdreamteam.se42.web.command.CommandHandler;
 /**
  * A {@link Command} that stops all active {@link Service Services}.
  */
-public class StopServicesCommand extends Command {
+public class StopServicesCommand implements Command {
 
     private final ServiceContainer container;
 
