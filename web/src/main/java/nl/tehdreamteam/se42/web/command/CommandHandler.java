@@ -16,6 +16,9 @@ public class CommandHandler {
 
     private final Map<String, Command> commands = new HashMap<>();
 
+    /**
+     * Registers all default {@link Command Commands}.
+     */
     public CommandHandler() {
         register(new HelpCommand());
     }
@@ -36,9 +39,7 @@ public class CommandHandler {
 
     private String parseIdentifierFromLine(String line) {
         String[] splits = line.split(COMMAND_ARGUMENT_SPLIT_TOKEN);
-        String identifier = splits[0];
-
-        return identifier;
+        return splits[0];
     }
 
     private String parseInputFromLine(String line) {
