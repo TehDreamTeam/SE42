@@ -27,7 +27,6 @@ public class CommandHandlerTest {
     @Test
     public void handle_unregisteredCommand_throwsException() {
         expectedException.expect(NullPointerException.class);
-        expectedException.expectMessage("Command with the given identifier not registered.");
 
         givenDefaultCommandHandler();
         givenCommandWithDefaultIdentifier();
@@ -79,7 +78,6 @@ public class CommandHandlerTest {
     @Test
     public void register_nullCommandIdentifiers_throwsException() {
         expectedException.expect(NullPointerException.class);
-        expectedException.expectMessage("This command has no identifiers.");
 
         givenDefaultCommandHandler();
         givenCommandWithNullIdentifiers();
@@ -90,7 +88,6 @@ public class CommandHandlerTest {
     @Test
     public void register_emptyCommandIdentifiers_throwsException() {
         expectedException.expect(NullPointerException.class);
-        expectedException.expectMessage("This command has no identifiers.");
 
         givenDefaultCommandHandler();
         givenCommandWithoutIdentifiers();
@@ -111,7 +108,6 @@ public class CommandHandlerTest {
     @Test
     public void deregister_nullCommandIdentifiers_throwsException() {
         expectedException.expect(NullPointerException.class);
-        expectedException.expectMessage("This command has no identifiers.");
 
         givenDefaultCommandHandler();
         givenCommandWithNullIdentifiers();
@@ -122,7 +118,6 @@ public class CommandHandlerTest {
     @Test
     public void deregister_emptyCommandIdentifiers_throwsException() {
         expectedException.expect(NullPointerException.class);
-        expectedException.expectMessage("This command has no identifiers.");
 
         givenDefaultCommandHandler();
         givenCommandWithoutIdentifiers();
