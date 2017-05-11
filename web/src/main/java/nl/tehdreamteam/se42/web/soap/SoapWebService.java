@@ -1,8 +1,8 @@
 package nl.tehdreamteam.se42.web.soap;
 
 import nl.tehdreamteam.se42.web.Service;
-import nl.tehdreamteam.se42.web.soap.conversation.SoapConversationController;
-import nl.tehdreamteam.se42.web.soap.user.SoapUserController;
+import nl.tehdreamteam.se42.web.soap.conversation.SoapConversationEndpoint;
+import nl.tehdreamteam.se42.web.soap.user.SoapUserEndpoint;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -49,8 +49,8 @@ public class SoapWebService implements Service {
     }
 
     private void registerEndpoints() {
-        addEndpoint(DEFAULT_URL + "user", new SoapUserController());
-        addEndpoint(DEFAULT_URL + "conversation", new SoapConversationController());
+        addEndpoint(DEFAULT_URL + "user", new SoapUserEndpoint());
+        addEndpoint(DEFAULT_URL + "conversation", new SoapConversationEndpoint());
     }
 
     private void addEndpoint(String url, Object implementor) {

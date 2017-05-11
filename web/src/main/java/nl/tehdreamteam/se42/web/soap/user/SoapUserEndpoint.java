@@ -2,7 +2,7 @@ package nl.tehdreamteam.se42.web.soap.user;
 
 import nl.tehdreamteam.se42.domain.LoginCredentials;
 import nl.tehdreamteam.se42.domain.User;
-import nl.tehdreamteam.se42.web.controller.UserController;
+import nl.tehdreamteam.se42.web.endpoint.UserEndpoint;
 import nl.tehdreamteam.se42.web.soap.SoapWebServiceConstants;
 import nl.tehdreamteam.se42.web.token.TokenFactory;
 import org.apache.logging.log4j.LogManager;
@@ -14,19 +14,19 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Implementation of {@link UserController} that receives and serves SOAP messages.
+ * Implementation of {@link UserEndpoint} that receives and serves SOAP messages.
  */
 @WebService(targetNamespace = SoapWebServiceConstants.DEFAULT_NAMESPACE + "user")
-public class SoapUserController implements UserController {
+public class SoapUserEndpoint implements UserEndpoint {
 
-    private static final Logger logger = LogManager.getLogger(SoapUserController.class.getSimpleName());
+    private static final Logger logger = LogManager.getLogger(SoapUserEndpoint.class.getSimpleName());
 
     private TokenFactory tokenFactory;
 
     /**
-     * Creates a new {@code SoapUserController}.
+     * Creates a new {@code SoapUserEndpoint}.
      */
-    public SoapUserController() {
+    public SoapUserEndpoint() {
         tokenFactory = new TokenFactory();
     }
 

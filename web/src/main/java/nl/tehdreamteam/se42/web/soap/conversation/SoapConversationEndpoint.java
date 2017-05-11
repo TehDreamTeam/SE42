@@ -1,7 +1,7 @@
 package nl.tehdreamteam.se42.web.soap.conversation;
 
 import nl.tehdreamteam.se42.domain.Message;
-import nl.tehdreamteam.se42.web.controller.ConversationController;
+import nl.tehdreamteam.se42.web.endpoint.ConversationEndpoint;
 import nl.tehdreamteam.se42.web.soap.SoapWebServiceConstants;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -16,9 +16,9 @@ import java.util.List;
  * @author Oscar de Leeuw
  */
 @WebService(targetNamespace = SoapWebServiceConstants.DEFAULT_NAMESPACE + "conversation")
-public class SoapConversationController implements ConversationController {
+public class SoapConversationEndpoint implements ConversationEndpoint {
 
-    private static final Logger logger = LogManager.getLogger(SoapConversationController.class.getSimpleName());
+    private static final Logger logger = LogManager.getLogger(SoapConversationEndpoint.class.getSimpleName());
 
     @Override
     public void addMessage(@WebParam(name = "token") String token, @WebParam(name = "content") String content, @WebParam(name = "conversation_id") long conversationId) {

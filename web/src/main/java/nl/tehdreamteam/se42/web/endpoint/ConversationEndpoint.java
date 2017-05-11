@@ -1,15 +1,15 @@
-package nl.tehdreamteam.se42.web.controller;
+package nl.tehdreamteam.se42.web.endpoint;
 
 import nl.tehdreamteam.se42.domain.Message;
 
 import java.util.List;
 
 /**
- * Web controller for controlling {@code Conversations}.
+ * Web endpoint for controlling {@code Conversations}.
  *
  * @author Oscar de Leeuw
  */
-public interface ConversationController {
+public interface ConversationEndpoint {
 
     /**
      * Creates a {@link Message} and adds it to the database.
