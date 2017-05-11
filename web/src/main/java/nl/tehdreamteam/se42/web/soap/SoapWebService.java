@@ -30,8 +30,16 @@ public class SoapWebService implements Service {
             return;
         }
 
-        registerEndpoints();
         started.set(true);
+
+        try {
+            registerEndpoints();
+        } catch (Exception e) {
+            stop();
+            logger.error(e);
+
+            throw e;
+        }
 
         logger.info("Soap service started on '{}'.", DEFAULT_URL);
     }
@@ -43,8 +51,8 @@ public class SoapWebService implements Service {
             return;
         }
 
-        stopEndpoints();
         started.set(false);
+        stopEndpoints();
 
         logger.info("Soap service stopped on '{}'.", DEFAULT_URL);
     }
