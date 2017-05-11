@@ -26,6 +26,8 @@ public final class ServiceContainer {
 
     /**
      * Registers a {@link Service} to this {@code ServiceContainer}.
+     *
+     * @param service The {@code Service} to register to this {@code ServiceContainer}.
      */
     public void addService(Service service) {
         services.add(service);
@@ -33,6 +35,8 @@ public final class ServiceContainer {
 
     /**
      * Deregisters a {@link Service} from this {@code ServiceContainer}.
+     *
+     * @param service The {@code Service} to deregister from this {@code ServiceContainer}.
      */
     public void removeService(Service service) {
         services.remove(service);
