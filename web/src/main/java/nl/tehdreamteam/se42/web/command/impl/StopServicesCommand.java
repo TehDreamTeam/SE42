@@ -1,13 +1,22 @@
 package nl.tehdreamteam.se42.web.command.impl;
 
+import nl.tehdreamteam.se42.web.Service;
 import nl.tehdreamteam.se42.web.ServiceContainer;
 import nl.tehdreamteam.se42.web.command.Command;
 import nl.tehdreamteam.se42.web.command.CommandHandler;
 
+/**
+ * A {@link Command} that stops all active {@link Service Services}.
+ */
 public class StopServicesCommand extends Command {
 
     private final ServiceContainer container;
 
+    /**
+     * Initializes this {@code ExitApplicationCommand} using the given arguments.
+     *
+     * @param container The {@link ServiceContainer} that will be used to stop all active {@link Service Services}.
+     */
     public StopServicesCommand(ServiceContainer container) {
         this.container = container;
     }

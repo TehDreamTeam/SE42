@@ -5,6 +5,9 @@ import nl.tehdreamteam.se42.web.command.CommandHandler;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+/**
+ * A {@link Command} that provides 'help' about other {@code Commands}.
+ */
 public class HelpCommand extends Command {
 
     private static final Logger logger = LogManager.getLogger(HelpCommand.class.getSimpleName());
