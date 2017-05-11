@@ -33,7 +33,7 @@ public class StartServicesCommand implements Command {
 
     @Override
     public String getDescription() {
-        return "Starts all inactive services.";
+        return "Starts all inactive services";
     }
 
     @Override

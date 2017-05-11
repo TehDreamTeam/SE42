@@ -35,7 +35,7 @@ public class ExitApplicationCommand implements Command {
 
     @Override
     public String getDescription() {
-        return "Firstly stops all active services, and then stops the Application.";
+        return "Firstly stops all active services, and then stops the Application";
     }
 
     @Override

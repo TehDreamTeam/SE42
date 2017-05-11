@@ -33,7 +33,7 @@ public class StopServicesCommand implements Command {
 
     @Override
     public String getDescription() {
-        return "Stops all active services.";
+        return "Stops all active services";
     }
 
     @Override
