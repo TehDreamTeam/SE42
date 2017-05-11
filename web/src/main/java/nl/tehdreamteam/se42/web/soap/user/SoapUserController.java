@@ -39,11 +39,15 @@ public class SoapUserController implements UserController {
 
     @Override
     public List<Long> getConversations(String token) {
+        logger.debug("Soap request for getting conversations with (token='{}').", token);
+
         return Arrays.asList(1L, 2L, 4L);
     }
 
     @Override
     public long registerUser(String username, String password) {
+        logger.debug("Soap request for registering an user with (username='{}', password='{}').", username, password);
+
         return 0;
     }
 }
