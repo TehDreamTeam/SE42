@@ -1,5 +1,7 @@
 package nl.tehdreamteam.se42.web.command;
 
+import nl.tehdreamteam.se42.web.command.impl.HelpCommand;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -13,6 +15,10 @@ public class CommandHandler {
     private static final String COMMAND_ARGUMENT_SPLIT_TOKEN = " ";
 
     private final Map<String, Command> commands = new HashMap<>();
+
+    public CommandHandler() {
+        register(new HelpCommand());
+    }
 
     /**
      * Handles a {@link Command} from the given input-{@code line}.
@@ -53,12 +59,24 @@ public class CommandHandler {
     }
 
     private void handle(String identifier, String input, String[] args) {
-        Command command = commands.get(identifier);
+        Command command = getCommand(identifier);
         if (command == null) {
             throw new NullPointerException("Command with the given identifier not registered.");
         }
 
         command.execute(this, input, args);
+    }
+
+    /**
+     * Finds a registered {@link Command}.
+     *
+     * @param identifier The {@code identifier} of the {@code Command} to find.
+     * @return A {@code Command} that was found.
+     */
+    public Command getCommand(String identifier) {
+        Objects.requireNonNull(identifier);
+
+        return commands.get(identifier);
     }
 
     /**

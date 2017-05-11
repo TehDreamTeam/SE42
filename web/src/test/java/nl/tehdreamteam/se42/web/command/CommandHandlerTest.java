@@ -58,6 +58,15 @@ public class CommandHandlerTest {
     }
 
     @Test
+    public void getCommand_nullCommand_throwsException() {
+        expectedException.expect(NullPointerException.class);
+
+        givenDefaultCommandHandler();
+
+        getNullCommand();
+    }
+
+    @Test
     public void register_nullCommand_throwsException() {
         expectedException.expect(NullPointerException.class);
 
@@ -137,6 +146,10 @@ public class CommandHandlerTest {
 
     private void handleNullCommand() {
         handler.handle(null);
+    }
+
+    private void getNullCommand() {
+        handler.getCommand(null);
     }
 
     private void registerCommand() {
