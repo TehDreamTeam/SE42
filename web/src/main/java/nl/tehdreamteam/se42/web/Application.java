@@ -1,13 +1,19 @@
 package nl.tehdreamteam.se42.web;
 
+import nl.tehdreamteam.se42.web.command.CommandHandler;
+import nl.tehdreamteam.se42.web.command.impl.ExitApplicationCommand;
+import nl.tehdreamteam.se42.web.command.impl.StartServicesCommand;
+import nl.tehdreamteam.se42.web.command.impl.StopServicesCommand;
 import nl.tehdreamteam.se42.web.soap.SoapWebService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.Scanner;
+
 /**
  * The {@code Application} class gathers all services (Such as SOAP, REST, etc.), and starts them.
  */
-public class Application {
+public final class Application {
 
     private static final Logger logger = LogManager.getLogger(Application.class.getSimpleName());
 
@@ -17,12 +23,29 @@ public class Application {
      * @param args The command-line arguments.
      */
     public static void main(String[] args) {
-        Service soap = new SoapWebService();
+        ServiceContainer container = new ServiceContainer();
+        container.addService(new SoapWebService());
 
         try {
-            soap.start();
+            container.startAll();
         } catch (Exception e) {
-            logger.fatal("Failed to start soap service.", e);
+            logger.fatal("Failed to start all services.", e);
+        }
+
+        CommandHandler handler = new CommandHandler();
+        handler.register(new StartServicesCommand(container));
+        handler.register(new StopServicesCommand(container));
+        handler.register(new ExitApplicationCommand(container));
+
+        startReadingCommandLine(handler);
+    }
+
+    private static void startReadingCommandLine(CommandHandler handler) {
+        try (Scanner sc = new Scanner(System.in)) {
+            String line;
+            while ((line = sc.nextLine()) != null) {
+                handler.handle(line);
+            }
         }
     }
 
