@@ -1,6 +1,6 @@
 package nl.tehdreamteam.se42.web.soap;
 
-import nl.tehdreamteam.se42.web.Service;
+import nl.tehdreamteam.se42.web.service.Service;
 import nl.tehdreamteam.se42.web.soap.user.SoapUserController;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

@@ -1,7 +1,7 @@
 package nl.tehdreamteam.se42.web.controller;
 
 import nl.tehdreamteam.se42.domain.User;
-import nl.tehdreamteam.se42.web.Service;
+import nl.tehdreamteam.se42.web.service.Service;
 
 /**
  * Defines functions that specific {@link Service Services} can use to serve content.

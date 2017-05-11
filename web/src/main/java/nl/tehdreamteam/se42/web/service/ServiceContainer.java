@@ -1,4 +1,4 @@
-package nl.tehdreamteam.se42.web;
+package nl.tehdreamteam.se42.web.service;
 
 import java.util.ArrayList;
 import java.util.Collection;

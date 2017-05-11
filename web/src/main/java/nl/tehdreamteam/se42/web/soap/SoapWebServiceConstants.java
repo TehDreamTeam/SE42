@@ -1,6 +1,6 @@
 package nl.tehdreamteam.se42.web.soap;
 
-import static nl.tehdreamteam.se42.web.ServiceConstants.DEFAULT_APPLICATION_NAME;
+import static nl.tehdreamteam.se42.web.service.ServiceConstants.DEFAULT_APPLICATION_NAME;
 
 /**
  * Defines constants specifically used by the {@link SoapWebService}.

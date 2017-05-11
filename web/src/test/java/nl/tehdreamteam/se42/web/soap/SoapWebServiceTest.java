@@ -1,6 +1,6 @@
 package nl.tehdreamteam.se42.web.soap;
 
-import nl.tehdreamteam.se42.web.Service;
+import nl.tehdreamteam.se42.web.service.Service;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;

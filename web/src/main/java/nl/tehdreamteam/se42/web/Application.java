@@ -4,6 +4,7 @@ import nl.tehdreamteam.se42.web.command.CommandHandler;
 import nl.tehdreamteam.se42.web.command.impl.ExitApplicationCommand;
 import nl.tehdreamteam.se42.web.command.impl.StartServicesCommand;
 import nl.tehdreamteam.se42.web.command.impl.StopServicesCommand;
+import nl.tehdreamteam.se42.web.service.ServiceContainer;
 import nl.tehdreamteam.se42.web.soap.SoapWebService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
