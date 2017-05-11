@@ -36,7 +36,7 @@ public class SoapWebService implements Service {
             registerEndpoints();
         } catch (Exception e) {
             stop();
-            logger.error(e);
+            logger.error("Failed to register endpoints.", e);
 
             throw e;
         }
