@@ -6,6 +6,8 @@ import nl.tehdreamteam.se42.web.token.Token;
 import nl.tehdreamteam.se42.web.token.TokenRegistry;
 import nl.tehdreamteam.se42.web.token.generator.TokenGenerator;
 import nl.tehdreamteam.se42.web.token.generator.impl.SimpleTokenGenerator;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,7 +21,9 @@ import java.util.Optional;
  */
 public class HashTokenRegistry extends AbstractTokenRegistry {
 
-    private final Map<User, Token> tokens = new HashMap<>();
+    private static final Logger logger = LogManager.getLogger(HashTokenRegistry.class);
+
+    private final Map<String, Token> tokens = new HashMap<>();
 
     /**
      * Initializes this {@code HashTokenRegistry} using a {@link SimpleTokenGenerator}.
@@ -43,29 +47,39 @@ public class HashTokenRegistry extends AbstractTokenRegistry {
     @Override
     public Token register(User user) {
         Token token = getAndDeregisterOptionally(user);
-        tokens.put(user, token);
+        tokens.put(getUsernameFromUser(user), token);
 
         return token;
     }
 
     private Token getAndDeregisterOptionally(User user) {
-        Token token = tokens.get(user);
+        Token token = tokens.get(getUsernameFromUser(user));
         if (Objects.nonNull(token)) {
             deregister(token);
         }
 
-        return getGenerator().generate(user);
+        token = getGenerator().generate(user);
+
+        logger.debug("Generated new token '{}' for user '{}'.", token.getId(), user.getLoginCredentials().getUsername());
+
+        return token;
     }
 
     @Override
     public void deregister(Token token) {
+        logger.debug("Invalidating token '{}' for user '{}'.", token.getId(), getUsernameFromUser(token.getUser()));
+
         token.invalidate();
-        tokens.remove(token.getUser(), token);
+        tokens.remove(getUsernameFromUser(token.getUser()), token);
     }
 
     @Override
     public Optional<Token> get(User user) {
-        return Optional.ofNullable(tokens.get(user));
+        return Optional.ofNullable(tokens.get(getUsernameFromUser(user)));
+    }
+
+    private String getUsernameFromUser(User user) {
+        return user.getLoginCredentials().getUsername();
     }
 
 }
