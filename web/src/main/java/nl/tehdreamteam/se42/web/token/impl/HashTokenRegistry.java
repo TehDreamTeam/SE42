@@ -23,7 +23,7 @@ public class HashTokenRegistry extends AbstractTokenRegistry {
 
     private static final Logger logger = LogManager.getLogger(HashTokenRegistry.class);
 
-    private final Map<String, Token> tokens = new HashMap<>();
+    private final Map<User, Token> tokens = new HashMap<>();
 
     /**
      * Initializes this {@code HashTokenRegistry} using a {@link SimpleTokenGenerator}.
@@ -47,39 +47,35 @@ public class HashTokenRegistry extends AbstractTokenRegistry {
     @Override
     public Token register(User user) {
         Token token = getAndDeregisterOptionally(user);
-        tokens.put(getUsernameFromUser(user), token);
+        tokens.put(user, token);
 
         return token;
     }
 
     private Token getAndDeregisterOptionally(User user) {
-        Token token = tokens.get(getUsernameFromUser(user));
+        Token token = tokens.get(user);
         if (Objects.nonNull(token)) {
             deregister(token);
         }
 
         token = getGenerator().generate(user);
 
-        logger.debug("Generated new token '{}' for user '{}'.", token.getId(), user.getLoginCredentials().getUsername());
+        logger.debug("Generated new token '{}' for user '{}'.", token.getId(), user);
 
         return token;
     }
 
     @Override
     public void deregister(Token token) {
-        logger.debug("Invalidating token '{}' for user '{}'.", token.getId(), getUsernameFromUser(token.getUser()));
+        logger.debug("Invalidating token '{}' for user '{}'.", token.getId(), token.getUser());
 
         token.invalidate();
-        tokens.remove(getUsernameFromUser(token.getUser()), token);
+        tokens.remove(token.getUser(), token);
     }
 
     @Override
     public Optional<Token> get(User user) {
-        return Optional.ofNullable(tokens.get(getUsernameFromUser(user)));
-    }
-
-    private String getUsernameFromUser(User user) {
-        return user.getLoginCredentials().getUsername();
+        return Optional.ofNullable(tokens.get(user));
     }
 
 }
