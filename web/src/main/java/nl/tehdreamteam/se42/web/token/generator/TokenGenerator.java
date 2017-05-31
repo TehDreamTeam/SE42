@@ -12,6 +12,7 @@ public interface TokenGenerator {
     /**
      * Generates a {@link Token} for the given {@link User}.
      *
+     * @param user The {@code user} to generate a {@code Token} for.
      * @return A generated {@code Token} for the given {@code user}.
      */
     Token generate(User user);
