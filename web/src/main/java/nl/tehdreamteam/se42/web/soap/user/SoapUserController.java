@@ -4,7 +4,9 @@ import nl.tehdreamteam.se42.domain.LoginCredentials;
 import nl.tehdreamteam.se42.domain.User;
 import nl.tehdreamteam.se42.web.controller.UserController;
 import nl.tehdreamteam.se42.web.soap.SoapWebServiceConstants;
-import nl.tehdreamteam.se42.web.token.TokenFactory;
+import nl.tehdreamteam.se42.web.token.Token;
+import nl.tehdreamteam.se42.web.token.TokenRegistry;
+import nl.tehdreamteam.se42.web.token.impl.HashTokenRegistry;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -21,20 +23,23 @@ public class SoapUserController implements UserController {
 
     private static final Logger logger = LogManager.getLogger(SoapUserController.class.getSimpleName());
 
-    private TokenFactory tokenFactory;
+    private final TokenRegistry registry;
 
     /**
      * Creates a new {@code SoapUserController}.
      */
     public SoapUserController() {
-        tokenFactory = new TokenFactory();
+        registry = new HashTokenRegistry();
     }
 
     @Override
     public String login(@WebParam(name = "username") String username, @WebParam(name = "password") String password) {
         logger.debug("Soap request for login (username='{}', password='{}').", username, password);
 
-        return tokenFactory.createToken(new User(new LoginCredentials(username, password))).getValue();
+        User user = new User(new LoginCredentials(username, password));
+        Token token = registry.getOrRegister(user);
+
+        return token.getId();
     }
 
     @Override
