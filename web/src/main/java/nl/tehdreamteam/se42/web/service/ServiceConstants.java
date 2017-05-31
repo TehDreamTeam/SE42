@@ -1,4 +1,4 @@
-package nl.tehdreamteam.se42.web;
+package nl.tehdreamteam.se42.web.service;
 
 /**
  * Defines constants for all {@link Service Services}.

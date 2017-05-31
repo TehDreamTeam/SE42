@@ -1,7 +1,7 @@
 package nl.tehdreamteam.se42.web.soap;
 
-import nl.tehdreamteam.se42.web.Service;
 import nl.tehdreamteam.se42.web.soap.conversation.SoapConversationController;
+import nl.tehdreamteam.se42.web.service.Service;
 import nl.tehdreamteam.se42.web.soap.user.SoapUserController;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -27,11 +27,20 @@ public class SoapWebService implements Service {
     @Override
     public void start() {
         if (isActive()) {
-            throw new IllegalStateException("Soap service already started.");
+            logger.debug("Soap service already started, ignoring start.");
+            return;
         }
 
-        registerEndpoints();
         started.set(true);
+
+        try {
+            registerEndpoints();
+        } catch (Exception e) {
+            stop();
+            logger.error("Failed to register endpoints.", e);
+
+            throw e;
+        }
 
         logger.info("Soap service started on '{}'.", DEFAULT_URL);
     }
@@ -39,11 +48,12 @@ public class SoapWebService implements Service {
     @Override
     public void stop() {
         if (!isActive()) {
-            throw new IllegalStateException("Soap service already stopped.");
+            logger.debug("Soap service already stopped, ignoring stop.");
+            return;
         }
 
-        stopEndpoints();
         started.set(false);
+        stopEndpoints();
 
         logger.info("Soap service stopped on '{}'.", DEFAULT_URL);
     }

@@ -1,4 +1,4 @@
-package nl.tehdreamteam.se42.web;
+package nl.tehdreamteam.se42.web.service;
 
 /**
  * A {@code Service} serves content to an external EndPoint. For example, a REST-{@code Service} would serve
