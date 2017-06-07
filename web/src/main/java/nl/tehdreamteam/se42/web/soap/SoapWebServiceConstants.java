@@ -20,7 +20,7 @@ public final class SoapWebServiceConstants {
     /**
      * Defines on which {@code port} the {@link SoapWebService} will be bound.
      */
-    public static final int DEFAULT_PORT = 7080;
+    public static final int DEFAULT_PORT = 8080;
 
     /**
      * Defines the fully qualified {@code url} on which the {@link SoapWebService} will be bound.
