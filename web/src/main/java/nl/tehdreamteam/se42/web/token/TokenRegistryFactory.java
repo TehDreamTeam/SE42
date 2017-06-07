@@ -9,6 +9,10 @@ public class TokenRegistryFactory {
 
     private static TokenRegistry registry = new HashTokenRegistry();
 
+    private TokenRegistryFactory() {
+        throw new UnsupportedOperationException("Should not be instantiated.");
+    }
+
     /**
      * Gets the global {@link TokenRegistry}.
      *
