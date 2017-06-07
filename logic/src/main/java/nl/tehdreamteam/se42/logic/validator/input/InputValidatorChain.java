@@ -19,6 +19,10 @@ public class InputValidatorChain extends ValidatorChain<InputValidatorChain, Inp
      * @return An optional with the first {@code ServerError} that was encountered.
      */
     public Optional<ServerError> validate() {
-        return validators.stream().map(InputValidator::validate).filter(Objects::nonNull).findFirst();
+        return validators.stream()
+                .sorted()
+                .map(InputValidator::validate)
+                .filter(Objects::nonNull)
+                .findFirst();
     }
 }

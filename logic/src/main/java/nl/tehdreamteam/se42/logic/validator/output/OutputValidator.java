@@ -14,8 +14,12 @@ import java.util.function.Predicate;
  */
 public abstract class OutputValidator<R> extends Validator {
 
-    protected OutputValidator(ServerError error) {
-        super(error);
+    protected OutputValidator(ServerError error, int priority) {
+        super(error, priority);
+    }
+
+    protected OutputValidator(ServerError error, Priority priority) {
+        super(error, priority);
     }
 
     protected abstract Predicate<R> getPredicate();

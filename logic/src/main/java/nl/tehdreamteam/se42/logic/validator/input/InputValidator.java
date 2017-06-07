@@ -13,8 +13,12 @@ import java.util.function.Supplier;
  */
 public abstract class InputValidator extends Validator {
 
-    protected InputValidator(ServerError error) {
-        super(error);
+    protected InputValidator(ServerError error, int priority) {
+        super(error, priority);
+    }
+
+    protected InputValidator(ServerError error, Priority priority) {
+        super(error, priority);
     }
 
     protected abstract Supplier<Boolean> getValidateFunction();

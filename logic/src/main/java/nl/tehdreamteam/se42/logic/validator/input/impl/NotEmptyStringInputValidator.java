@@ -22,7 +22,7 @@ public class NotEmptyStringInputValidator extends InputValidator {
      * @param checkedValue The {@code String} that should be checked.
      */
     public NotEmptyStringInputValidator(ServerError error, String checkedValue) {
-        super(error);
+        super(error, Priority.NORMAL);
         this.checkedValue = checkedValue;
     }
 

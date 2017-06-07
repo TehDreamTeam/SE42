@@ -8,15 +8,48 @@ import nl.tehdreamteam.se42.logic.exception.ServerError;
  *
  * @author Oscar de Leeuw
  */
-public abstract class Validator {
+public abstract class Validator implements Comparable<Validator> {
 
-    private ServerError error;
+    private final ServerError error;
+    private final int priority;
 
-    protected Validator(ServerError error) {
+    protected Validator(ServerError error, int priority) {
         this.error = error;
+        this.priority = priority;
+    }
+
+    protected Validator(ServerError error, Priority priority) {
+        this(error, priority.value());
     }
 
     public ServerError getError() {
         return error;
+    }
+
+    @Override
+    public int compareTo(Validator o) {
+        return Integer.compare(priority, o.priority);
+    }
+
+    /**
+     * Enum for determining the priority of a validator.
+     */
+    public enum Priority {
+        LOWEST(Integer.MAX_VALUE), LOW(1), NORMAL(0), HIGH(-1), HIGHEST(Integer.MIN_VALUE);
+
+        private int value;
+
+        Priority(int value) {
+            this.value = value;
+        }
+
+        /**
+         * Gets the value of the enum.
+         *
+         * @return The value.
+         */
+        public int value() {
+            return value;
+        }
     }
 }

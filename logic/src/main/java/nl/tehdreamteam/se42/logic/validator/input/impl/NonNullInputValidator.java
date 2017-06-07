@@ -23,7 +23,7 @@ public class NonNullInputValidator extends InputValidator {
      * @param object The object that should be evaluated.
      */
     public NonNullInputValidator(ServerError error, Object object) {
-        super(error);
+        super(error, Priority.HIGHEST);
         this.object = object;
     }
 

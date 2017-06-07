@@ -23,7 +23,7 @@ public class PasswordOutputValidator extends OutputValidator<User> {
      * @param password The password that should match the {@code User's} password.
      */
     public PasswordOutputValidator(ServerError error, String password) {
-        super(error);
+        super(error, Priority.NORMAL);
         this.password = password;
     }
 

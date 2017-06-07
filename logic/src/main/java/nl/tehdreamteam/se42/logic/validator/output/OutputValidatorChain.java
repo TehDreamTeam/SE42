@@ -22,6 +22,7 @@ public class OutputValidatorChain<R> extends ValidatorChain<OutputValidatorChain
      */
     public Optional<ServerError> validate(R value) {
         return validators.stream()
+                .sorted()
                 .map(r -> r.validate(value))
                 .filter(Objects::nonNull)
                 .findFirst();   //TODO SHOULD EVALUATE THE RIGHT WAY.
