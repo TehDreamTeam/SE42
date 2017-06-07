@@ -27,13 +27,13 @@ public abstract class AbstractTokenRegistry implements TokenRegistry {
     }
 
     @Override
-    public void setGenerator(TokenGenerator generator) {
-        this.generator = generator;
+    public TokenGenerator getGenerator() {
+        return generator;
     }
 
     @Override
-    public TokenGenerator getGenerator() {
-        return generator;
+    public void setGenerator(TokenGenerator generator) {
+        this.generator = generator;
     }
 
 }

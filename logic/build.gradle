@@ -1,0 +1,7 @@
+description = 'Business logic'
+
+dependencies {
+    compile project(':data')
+    compile project(':domain')
+    compile group: 'com.jnape.palatable', name: 'lambda', version: '1.5.6'
+}

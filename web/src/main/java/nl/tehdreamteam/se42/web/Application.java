@@ -32,6 +32,16 @@ public final class Application {
         handler.register(new ExitApplicationCommand(container));
     }
 
+    /**
+     * Starts all services.
+     *
+     * @param args The command-line arguments.
+     */
+    public static void main(String[] args) {
+        Application application = new Application();
+        application.startReadingCLI();
+    }
+
     private void startReadingCLI() {
         try (Scanner sc = new Scanner(System.in)) {
             processScannerInput(sc);
@@ -51,16 +61,6 @@ public final class Application {
         } catch (Exception e) {
             logger.error("Failed to execute command.", e);
         }
-    }
-
-    /**
-     * Starts all services.
-     *
-     * @param args The command-line arguments.
-     */
-    public static void main(String[] args) {
-        Application application = new Application();
-        application.startReadingCLI();
     }
 
 }
