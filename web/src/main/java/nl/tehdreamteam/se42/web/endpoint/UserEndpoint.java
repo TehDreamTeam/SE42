@@ -1,4 +1,4 @@
-package nl.tehdreamteam.se42.web.controller;
+package nl.tehdreamteam.se42.web.endpoint;
 
 import nl.tehdreamteam.se42.domain.User;
 import nl.tehdreamteam.se42.web.service.Service;
@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Defines functions that specific {@link Service Services} can use to serve content.
  */
-public interface UserController {
+public interface UserEndpoint {
 
     /**
      * Logs a {@link User} in, given that the specified {@code username} and {@code password} are correct, and returns
