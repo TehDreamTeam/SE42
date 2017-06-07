@@ -2,7 +2,7 @@ package nl.tehdreamteam.se42.web.soap.user;
 
 import nl.tehdreamteam.se42.domain.LoginCredentials;
 import nl.tehdreamteam.se42.domain.User;
-import nl.tehdreamteam.se42.web.controller.UserController;
+import nl.tehdreamteam.se42.web.endpoint.UserEndpoint;
 import nl.tehdreamteam.se42.web.soap.SoapWebServiceConstants;
 import nl.tehdreamteam.se42.web.token.Token;
 import nl.tehdreamteam.se42.web.token.TokenRegistry;
@@ -16,19 +16,19 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Implementation of {@link UserController} that receives and serves SOAP messages.
+ * Implementation of {@link UserEndpoint} that receives and serves SOAP messages.
  */
 @WebService(targetNamespace = SoapWebServiceConstants.DEFAULT_NAMESPACE + "user")
-public class SoapUserController implements UserController {
+public class SoapUserEndpoint implements UserEndpoint {
 
-    private static final Logger logger = LogManager.getLogger(SoapUserController.class.getSimpleName());
+    private static final Logger logger = LogManager.getLogger(SoapUserEndpoint.class.getSimpleName());
 
     private final TokenRegistry registry;
 
     /**
      * Creates a new {@code SoapUserController}.
      */
-    public SoapUserController() {
+    public SoapUserEndpoint() {
         registry = new HashTokenRegistry();
     }
 
@@ -40,6 +40,11 @@ public class SoapUserController implements UserController {
         Token token = registry.getOrRegister(user);
 
         return token.getId();
+    }
+
+    @Override
+    public long registerUser(String username, String password) {
+        return 0;
     }
 
     @Override

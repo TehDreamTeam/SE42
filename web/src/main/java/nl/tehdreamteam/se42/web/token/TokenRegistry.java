@@ -37,18 +37,18 @@ public interface TokenRegistry {
     Optional<Token> get(User user);
 
     /**
-     * Sets the {@link TokenGenerator} for this {@code TokenRegistry}.
-     *
-     * @param generator The new {@code generator} to use for this {@code TokenRegistry}.
-     */
-    void setGenerator(TokenGenerator generator);
-
-    /**
      * Gets the {@link TokenGenerator} for this {@code TokenRegistry}.
      *
      * @return The {@code generator} that this {@code TokenRegistry} uses.
      */
     TokenGenerator getGenerator();
+
+    /**
+     * Sets the {@link TokenGenerator} for this {@code TokenRegistry}.
+     *
+     * @param generator The new {@code generator} to use for this {@code TokenRegistry}.
+     */
+    void setGenerator(TokenGenerator generator);
 
     /**
      * Gets the {@link Token} for the given {@link User}. If the given {@code user} has {@code token} currently

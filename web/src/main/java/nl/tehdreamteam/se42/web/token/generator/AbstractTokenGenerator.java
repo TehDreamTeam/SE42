@@ -29,13 +29,13 @@ public abstract class AbstractTokenGenerator implements TokenGenerator {
     }
 
     @Override
-    public void setIdGenerator(TokenIdGenerator generator) {
-        this.generator = generator;
+    public TokenIdGenerator getIdGenerator() {
+        return generator;
     }
 
     @Override
-    public TokenIdGenerator getIdGenerator() {
-        return generator;
+    public void setIdGenerator(TokenIdGenerator generator) {
+        this.generator = generator;
     }
 
 }
