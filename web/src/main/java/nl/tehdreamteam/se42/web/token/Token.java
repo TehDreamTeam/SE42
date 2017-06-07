@@ -2,47 +2,38 @@ package nl.tehdreamteam.se42.web.token;
 
 import nl.tehdreamteam.se42.domain.User;
 
-import java.time.LocalDateTime;
-
 /**
- * A {@code Token} is an object for keeping track of a logged-in {@code User}.
- *
- * @author Oscar de Leeuw
+ * A {@code Token} can be used to identify a {@link User}.
  */
-public class Token {
-
-    private String value;
-    private User user;
-    private LocalDateTime created;
-    private LocalDateTime lastUsed;
+public interface Token {
 
     /**
-     * Creates a new {@code Token}.
+     * Gets the {@code identifier} of this {@code Token}.
      *
-     * @param user       The {@code User} for which to create a {@code Token}.
-     * @param strategy   The {@code Strategy} for generating a {@code Token}.
-     * @param createTime The time of creation.
+     * @return A {@link String} containing the {@code identifier} for this {@code Token}.
      */
-    public Token(User user, TokenGenerationStrategy strategy, LocalDateTime createTime) {
-        this.user = user;
-        this.created = createTime;
-        this.value = strategy.generateToken(user);
-        this.lastUsed = createTime;
-    }
+    String getId();
 
-    public String getValue() {
-        return value;
-    }
+    /**
+     * Gets the {@link User} that this token identifies.
+     *
+     * @return The {@code User} that this token identifies.
+     */
+    User getUser();
 
-    public User getUser() {
-        return user;
-    }
+    /**
+     * Checks whether this {@code Token} is {@code valid}. If a {@code Token} is {@code invalid}, it should not, in any
+     * way, be considered useful for identification.
+     *
+     * @return True if, and only if, this {@code Token} is {@code valid}.
+     */
+    boolean isValid();
 
-    public LocalDateTime getCreated() {
-        return created;
-    }
+    /**
+     * Invalidates this {@code Token} so that it no longer can be considered useful for identification.
+     *
+     * @see #isValid()
+     */
+    void invalidate();
 
-    public LocalDateTime getLastUsed() {
-        return lastUsed;
-    }
 }

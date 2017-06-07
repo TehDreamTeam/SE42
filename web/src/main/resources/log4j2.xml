@@ -3,13 +3,13 @@
     <Appenders>
         <RandomAccessFile name="File" fileName="application.log">
             <PatternLayout>
-                <Pattern>(%date) [%level]: %message%n%throwable</Pattern>
+                <Pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] %5p --- %-20.20c{1.} %message%n%xEx</Pattern>
             </PatternLayout>
         </RandomAccessFile>
 
         <Console name="Console">
             <PatternLayout>
-                <Pattern>%highlight{(%date) [%level]: %message%n%throwable}</Pattern>
+                <Pattern>[%style{%d{HH:mm:ss.SSS}}{Red}] %highlight{%5p} --- %style{%-20.20c{1.}}{Cyan}%message%style{%throwable{none}}{Red}%n</Pattern>
             </PatternLayout>
         </Console>
     </Appenders>

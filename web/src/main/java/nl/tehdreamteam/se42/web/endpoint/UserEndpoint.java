@@ -1,7 +1,7 @@
 package nl.tehdreamteam.se42.web.endpoint;
 
 import nl.tehdreamteam.se42.domain.User;
-import nl.tehdreamteam.se42.web.Service;
+import nl.tehdreamteam.se42.web.service.Service;
 
 import java.util.List;
 
