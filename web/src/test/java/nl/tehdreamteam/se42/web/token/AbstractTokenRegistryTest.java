@@ -23,6 +23,7 @@ public abstract class AbstractTokenRegistryTest {
     private TokenRegistry registry;
     private TokenGenerator generator;
     private Token token;
+    private Token userToken;
     private Token getOrRegisterToken;
     private Token oldToken;
     private User user;
@@ -32,6 +33,7 @@ public abstract class AbstractTokenRegistryTest {
         registry = null;
         generator = null;
         token = null;
+        userToken = null;
         getOrRegisterToken = null;
         oldToken = null;
         user = null;
@@ -55,6 +57,16 @@ public abstract class AbstractTokenRegistryTest {
         registerToken();
 
         verifyGeneratedTokenIsRegistered();
+    }
+
+    @Test
+    public final void register_whenCalled_registersUserForToken() {
+        givenTokenRegistryWithGenerator();
+        givenStandardUser();
+
+        registerToken();
+
+        verifyGeneratedTokenIsRegisteredForUser();
     }
 
     @Test
@@ -183,6 +195,10 @@ public abstract class AbstractTokenRegistryTest {
 
     private void verifyGeneratedTokenIsRegistered() {
         assertThat(registry.get(user), is(Optional.of(token)));
+    }
+
+    private void verifyGeneratedTokenIsRegisteredForUser() {
+        assertThat(registry.get(token.getId()), is(Optional.of(token)));
     }
 
     private void verifyGeneratedTokenIsEqual() {
