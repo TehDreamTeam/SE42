@@ -33,6 +33,11 @@ public class SoapUserEndpoint implements UserEndpoint {
     }
 
     @Override
+    public long registerUser(String username, String password) {
+        return 0;
+    }
+
+    @Override
     public List<Long> getConversations(String token) {
         return Arrays.asList(1L, 2L, 4L);
     }
