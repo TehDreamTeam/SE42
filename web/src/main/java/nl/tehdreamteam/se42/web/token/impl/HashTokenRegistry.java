@@ -23,6 +23,7 @@ public class HashTokenRegistry extends AbstractTokenRegistry {
 
     private static final Logger logger = LogManager.getLogger(HashTokenRegistry.class);
 
+    private final Map<String, Token> identifiers = new HashMap<>();
     private final Map<User, Token> tokens = new HashMap<>();
 
     /**
@@ -47,6 +48,8 @@ public class HashTokenRegistry extends AbstractTokenRegistry {
     @Override
     public Token register(User user) {
         Token token = getAndDeregisterOptionally(user);
+
+        identifiers.put(token.getId(), token);
         tokens.put(user, token);
 
         return token;
@@ -70,12 +73,19 @@ public class HashTokenRegistry extends AbstractTokenRegistry {
         logger.debug("Invalidating token '{}' for user '{}'.", token.getId(), token.getUser());
 
         token.invalidate();
+
+        identifiers.remove(token.getId(), token);
         tokens.remove(token.getUser(), token);
     }
 
     @Override
     public Optional<Token> get(User user) {
         return Optional.ofNullable(tokens.get(user));
+    }
+
+    @Override
+    public Optional<Token> get(String id) {
+        return Optional.ofNullable(identifiers.get(id));
     }
 
 }

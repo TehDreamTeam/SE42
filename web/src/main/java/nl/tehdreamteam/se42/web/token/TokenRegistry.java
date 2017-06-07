@@ -37,11 +37,12 @@ public interface TokenRegistry {
     Optional<Token> get(User user);
 
     /**
-     * Gets the {@link TokenGenerator} for this {@code TokenRegistry}.
+     * Gets a {@link Token} with the given {@code identifier}, if it was registered.
      *
-     * @return The {@code generator} that this {@code TokenRegistry} uses.
+     * @param id The {@code identifier} of the {@code Token} to get.
+     * @return An {@link Optional} containing the found {@code Token}.
      */
-    TokenGenerator getGenerator();
+    Optional<Token> get(String id);
 
     /**
      * Sets the {@link TokenGenerator} for this {@code TokenRegistry}.
@@ -49,6 +50,13 @@ public interface TokenRegistry {
      * @param generator The new {@code generator} to use for this {@code TokenRegistry}.
      */
     void setGenerator(TokenGenerator generator);
+
+    /**
+     * Gets the {@link TokenGenerator} for this {@code TokenRegistry}.
+     *
+     * @return The {@code generator} that this {@code TokenRegistry} uses.
+     */
+    TokenGenerator getGenerator();
 
     /**
      * Gets the {@link Token} for the given {@link User}. If the given {@code user} has {@code token} currently
