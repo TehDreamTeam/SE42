@@ -6,6 +6,8 @@ import nl.tehdreamteam.se42.logic.exception.ServerError;
 import nl.tehdreamteam.se42.logic.exception.impl.DefaultExceptionHandler;
 import nl.tehdreamteam.se42.logic.validator.input.InputValidatorChain;
 import nl.tehdreamteam.se42.logic.validator.output.OutputValidatorChain;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.Optional;
 import java.util.function.Supplier;
@@ -18,6 +20,8 @@ import java.util.function.Supplier;
  * @author Oscar de Leeuw
  */
 public class BusinessLogic {
+
+    private static Logger logger = LogManager.getLogger(BusinessLogic.class);
 
     private BusinessLogic() {
         throw new UnsupportedOperationException("Should not be initiated");
@@ -42,6 +46,9 @@ public class BusinessLogic {
         Optional<ServerError> inputError = inputValidation.validate();
         if (inputError.isPresent()) {
             ret = Either.left(inputError.get());
+
+            logger.info("Input validation failed with error", inputError.get());
+
             return ret;
         }
 
@@ -52,12 +59,17 @@ public class BusinessLogic {
         }
 
         if (ret.projectA().isPresent()) {
+            logger.info("Database error occurred.", ret.projectA().get());
+
             return ret;
         }
 
         Optional<ServerError> outputError = outputValidation.validate(ret.orThrow(e -> new IllegalStateException("Retrieved value should not be null.")));
 
         if (outputError.isPresent()) {
+
+            logger.info("Output validation failed with error.", outputError.get());
+
             ret = Either.left(outputError.get());
         }
 
